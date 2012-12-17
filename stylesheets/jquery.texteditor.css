@@ -1,0 +1,22 @@
+
+/* Style the buttons */
+.js-editor-buttons { float: left; border-bottom : 1px solid #CCC; }
+.js-editor-buttons a {
+	display: block;
+	float: left;	
+
+	padding: 0px 5px;
+	margin: 5px;
+	
+	font-family: Bitstream Vera Sans Mono, Consolas, Courier, monospace;
+	text-align: center;
+	text-decoration: none;
+	color: #000;
+
+	cursor: pointer;
+}
+
+.bold { font-weight: bold !important; }
+.italic { font-style: italic !important; }
+.underline { text-decoration: underline !important; }
+.strikethrough { text-decoration: line-through !important; }

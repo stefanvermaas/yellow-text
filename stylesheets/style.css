@@ -1,0 +1,25 @@
+* { margin: 0; padding: 0; }
+
+.wrapper {
+	width: 400px;
+	margin: 50px auto;
+}
+
+h1 { font: 2em arial; color: black; margin-bottom: 15px; }
+
+input[type="submit"] {
+	display: block;
+	float: right;
+	margin-top: 20px;
+	padding: 5px 20px;
+
+	border: 1px solid #4E7AA9;
+	border-radius: 2px;
+	background-color: #356994;
+	
+	font: 1em arial;
+	color: white;
+	text-shadow: 0 1px 0 #000000;
+
+	cursor: pointer;
+}
