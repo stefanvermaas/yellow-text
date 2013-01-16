@@ -1,0 +1,89 @@
+/*!*
+*
+*	Yellow Text 
+*	========================================
+*	This is a pre-made theme for the Yellow
+*	text editor and it's not needed to run
+*	the plugin. 
+*
+*/
+
+// Include Compass for some nice additions
+@import "compass/css3";
+
+// Style the container
+.js-editor-container { 
+	margin-top: 0.5em; 
+	border: 1px solid #c9c8c8 !important; 
+	border-radius: 3px;
+	box-shadow: 0 0 5px rgba( 0, 0, 0, 0.15 );
+}
+
+/*!*
+*
+*	Buttons
+*	========================================
+*	This section styles the buttons and the 
+*	button bar, that holds all the buttons.
+*
+*/
+.js-editor-buttons { 
+	border-bottom: 1px solid rgba(0, 0, 0, 0.25); 
+	@include background-image( linear-gradient( #e8e8e8, #d2d1d1 ) ); 
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+}
+
+.js-editor-buttons > a {
+	display: block;
+	float: left;
+	width: 16px;
+	height: 16px;
+	margin: 8px;
+
+	font: 16px Georgia;
+	text-align: center;
+	text-transform: uppercase;
+	text-shadow: 0 1px #fff;
+	cursor: pointer;
+}
+
+// Standard textual buttons
+.bold { font-weight: bold; }
+.underline { text-decoration: underline; }
+.italic { font-style: italic; }
+.strikethrough { text-decoration: line-through; }
+
+// Start the spriting process
+$icon-spacing: 30px;
+@import "icon/*.png";
+
+// Buttons with images
+.JustifyLeft,
+.JustifyCenter,
+.JustifyRight,
+.InsertUnorderedList,
+.InsertOrderedList,
+.image,
+.link { 
+	margin-top: 9px;
+	text-indent: -99999em;
+}
+
+// Put the right sprite on the right spot
+.JustifyLeft { @include icon-sprite( align-left ); }
+.JustifyCenter { @include icon-sprite( align-center ); }
+.JustifyRight { @include icon-sprite( align-right ); }
+
+.InsertUnorderedList { @include icon-sprite( unordered-list ); }
+.InsertOrderedList { @include icon-sprite( ordered-list ); }
+
+.image { @include icon-sprite( image ); }
+.link { @include icon-sprite( link ); }
+
+.js-editor-buttons a:first-child { margin-left: 35px; }
+.js-editor-buttons a:nth-child( 4 ) { margin-right: 35px; }
+.js-editor-buttons a:nth-child( 7 ) { margin-right: 35px; }
+.js-editor-buttons a:nth-child( 9 ) { margin-right: 35px; }
+
+// Style the iFrame a bit
+.js-editor-iframe { box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.25); }

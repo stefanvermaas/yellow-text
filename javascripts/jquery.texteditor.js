@@ -3,14 +3,14 @@
 
     // Create some standard options
     var settings = $.extend( {
-      "width"           : "400px",
-      "height"          : "200px",
+      "width"           : "100%",
+      "height"          : "300px",
       "containerClass"  : "js-editor-container",
       "buttonsClass"    : "js-editor-buttons",
       "iFrameClass"     : "js-editor-iframe",
       "formID"          : "js-editor-form",
       "cleanOnSubmit"   : true,
-      "defaultFont"     : "Bitstream Vera Sans Mono, Consolas, Courier, monospace",
+      "defaultFont"     : "Helvetica Neue, Helvetica, arial, sans-serief",
       "defaultFontSize" : "1em",
       "defaultFontColor": "#000000",
       "defaultActions"  : "bold, underline, italic, strikethrough, align-left, align-center, align-right, unorderd-list, ordered-list, link, image"
@@ -112,18 +112,20 @@
 
         // Create a function that loops through the elements that are needed
         var createBtn = function( btn ) {
+          
+          // Create a button
           $("<a />")
-                  .addClass(btn.command)
-                  .text(btn.content)
-                  .attr("data-command", btn.command)
-                  .appendTo(buttons);
+                  .addClass( btn.command )
+                  .text( btn.content )
+                  .attr( "data-command", btn.command )
+                  .appendTo( buttons );
         };
 
         // Build the buttons and add before the container
-        var buttons = $("<div />").addClass(settings.buttonsClass).css({
+        var buttons = $("<div />").addClass( settings.buttonsClass ).css({
           "float"   : "left",
           "width"   : settings.width
-        }).prependTo(container);
+        }).prependTo( container );
 
         // Build an array with all the buttons that has to be created
         // This data is stored into defaultActions

@@ -1,0 +1,37 @@
+/*!*
+*
+*	Demo Yellow Text
+*	====================================
+*	Author: Stefan Vermaas
+*	URL: www.stefanvermaas.nl
+*	Version: 0.1
+*/
+
+/**	
+*
+*	Demo basics
+*	====================================
+*	This is just a basic stylesheet to 
+*	center the text editor in the middle
+*	of the page and some resets to start
+*	with a clean sheet.
+*
+*/
+@import "compass/reset";
+@import "compass/css3";
+
+* { 
+	margin: 0; 
+	padding: 0; 
+	@include box-sizing(border-box);
+}
+
+// Wrapper 
+.l-wrapper { width: 500px; margin: 20px auto; }
+
+// The form
+.editor-title,
+.editor-sub-title { text-align: center; }
+
+.editor-title { font: 2.4em/1.5 Pacifico;  }
+.editor-sub-title { font: 1em/1.33 Georgia; margin-bottom: .5em; }
