@@ -1,3 +1,0 @@
-$(function() {
-	$("#js-textarea").texteditor();
-});
