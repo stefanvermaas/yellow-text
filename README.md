@@ -35,4 +35,5 @@ Feel free to extend the theme or build your own.
 [Stefan](http://www.stefanvermaas.nl) wrote this file. As long as you retain this notice you can do whatever you want with this stuff. If we meet some day, and you think this stuff is worth it, you can buy me a beer in return.
 
 ### Changelog
-- v0.1: 
+- v0.1: Very raw first version of the plugin
+- v0.2: First stable version of the plugin. Rebuild v0.1 from the ground to make it more robust.
