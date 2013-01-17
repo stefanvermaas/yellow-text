@@ -1,6 +1,8 @@
 ## Yellow Text
 Editing text should be a pain. It should be simple. It should be pretty. With Yellow Text it is. 
 
+![image](http://f.cl.ly/items/3A1s071l1H0M1c34210k/Schermafbeelding%202013-01-16%20om%2019.02.11.png)
+
 This lightweight jQuery plugin ( minified it's just 4.5kb !!! ) can be used to make your text editing proces a lot easier and more fun. The text editor only contains the most basic functions you need for editing text.
 
 ### Install
