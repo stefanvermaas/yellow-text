@@ -7,6 +7,7 @@ This lightweight jQuery plugin ( minified it's just 4.5kb !!! ) can be used to m
 Using this plugin is really simple. Just download the source code from GitHub and include the jquery.texteditor-min.js ( for live websites ) or jquery.texteditor.js. You're almost good to go now!
 
 `<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script> <!-- include jquery -->
+
 <script type="text/javascript" src="javascripts/jquery.texteditor-min.js"></script> <!-- include the texteditor script -->`
 
 The only thing we need to do now is call the plugin to see the text editor shine.
