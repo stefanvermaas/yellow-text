@@ -336,7 +336,7 @@
 		*	as it provides a command to execute.
 		*
 		*/		
-        runCMD: function( cmd ) {
+		runCMD: function( cmd ) {
 
 	        // Check command for special actions and run it
 	        if( cmd === "image" ) {
@@ -362,7 +362,7 @@
 		*	the code and makes it pretty. Just like we want too.
 		*
 		*/        
-        cleanTheCode: function() {
+		cleanTheCode: function() {
 			
 			// Define the body element
 			var body = $(this.editor).contents().find("body");
@@ -400,7 +400,7 @@
 				// The first line does not have a p tag
 				body.find(firstLine).wrap("p");
 			}
-        },
+		},
         
 		/**
 		*
@@ -412,7 +412,7 @@
 		*	where the plugin is binded too.
 		*
 		*/        
-        putContentBack: function() {
+		putContentBack: function() {
 			// Grap the content of the iframe
 			var postData = $(this.editor).contents().find("body").html();
 
