@@ -51,9 +51,8 @@
 			// Grap the content and put it in the iframe
 			this.getContent();			
 			
-			// React on clicks
+			// Listen to events and react on them
 			this.events();
-			
 		},
 			
 		/**
@@ -71,7 +70,6 @@
 			
 			// Render the buttons
 			this.createButtons();
-			
 		},
 		
 		/**
@@ -87,47 +85,47 @@
 			// Hide the current text field
 			$(this.el).hide();
 			
-	        // Create a container which will hold or text editor
-	        this.container = $("<div />").addClass( this.settings.containerClass ).css({
-	          "float"   : "left",
-	          "width"   : this.settings.width,
-	          "border"  : "1px solid #ccc"
-	        });
-	        
-	        // Add the container after the element where we bind this plugin too
-	        $(this.el).after( this.container );
+			// Create a container which will hold or text editor
+			this.container = $("<div />").addClass( this.settings.containerClass ).css({
+				"float"   : "left",
+				"width"   : this.settings.width,
+				"border"  : "1px solid #ccc"
+			});
+			
+			// Add the container after the element where we bind this plugin too
+			$(this.el).after( this.container );
 	
-	        // Create the iFrame and append to the previously created container
-	        this.editor = $("<iframe />").addClass( this.settings.iFrameClass ).css({
-	          "float"   : "left",
-	          "width"   : this.settings.width,
-	          "height"  : this.settings.height,
-	          "border"  : "0",
-	          "overflow": "hidden"
-	        }).appendTo( this.container ).get(0);
-	
-	        // Make the editor work in all browsers
-	        this.editor.contentWindow.document.open();
-	        this.editor.contentWindow.document.close();
-	        this.editor.contentWindow.document.designMode="on";
-	
-	        // Set the standard fonts etc
-	        $(this.editor).contents().find("body").css({
-	          "word-wrap"     : "break-word",
-	          "font-family"   : this.settings.defaultFont,
-	          "font-size"     : this.settings.defaultFontSize,
-	          "color"         : this.settings.defaultFontColor
-	        });
-	
-	        // Add some css to the iFrame
-	        var iFrameCSS = '<style type="text/css">body{padding: 2%;} p { margin: 0; }</style>';
-	        $(this.editor).contents().find("head").append(iFrameCSS);
-	        
-	        // Build the button container
-	        this.buttons = $("<div />").addClass( this.settings.buttonsClass ).css({
-	          "float"   : "left",
-	          "width"   : this.settings.width
-	        }).prependTo( this.container );	
+			// Create the iFrame and append to the previously created container
+			this.editor = $("<iframe />").addClass( this.settings.iFrameClass ).css({
+				"float"   : "left",
+				"width"   : this.settings.width,
+				"height"  : this.settings.height,
+				"border"  : "0",
+				"overflow": "hidden"
+			}).appendTo( this.container ).get(0);
+			
+			// Make the editor work in all browsers
+			this.editor.contentWindow.document.open();
+			this.editor.contentWindow.document.close();
+			this.editor.contentWindow.document.designMode="on";
+			
+			// Set the standard fonts etc
+			$(this.editor).contents().find("body").css({
+				"word-wrap"     : "break-word",
+				"font-family"   : this.settings.defaultFont,
+				"font-size"     : this.settings.defaultFontSize,
+				"color"         : this.settings.defaultFontColor
+			});
+			
+			// Add some css to the iFrame
+			var iFrameCSS = '<style type="text/css">body{padding: 2%;} p { margin: 0; }</style>';
+			$(this.editor).contents().find("head").append(iFrameCSS);
+			
+			// Build the button container
+			this.buttons = $("<div />").addClass( this.settings.buttonsClass ).css({
+				"float"   : "left",
+				"width"   : this.settings.width
+			}).prependTo( this.container );	
 		},
 		
 		/**
@@ -141,12 +139,12 @@
 		*
 		*/		
 		getContent: function() {
+		
+			// Grap the content of the textarea
+			var content = $(this.el).text();
 	
-	        // Grap the content of the textarea
-	        var content = $(this.el).text();
-	
-	        // Put the content of the textarea into the editor
-	        $( this.editor ).contents().find("body").append(content);
+			// Put the content of the textarea into the editor
+			$( this.editor ).contents().find("body").append(content);
 		},		
 				
 		/**
@@ -242,7 +240,6 @@
 				
 				// React on the button event
 				that.buttonClicked( e, this );
-				
 			});
 			
 			// Bind to the keypress event while typing
@@ -252,7 +249,6 @@
 				if( e.ctrlKey || e.metaKey ) {
 					that.shortkey( e, this );
 				}
-				
 			});
 			
 			// Bind to the submit event of the form
@@ -263,9 +259,6 @@
 				
 				// Put the content back in the textfield
 				this.putContentBack();
-				
-				return false;
-				
 			}); 
 			
 		},
@@ -280,18 +273,18 @@
 		*
 		*/
 		buttonClicked: function( e, that ) {
+			
+			// Get the command
+			var command = $(that).attr("data-command");
+			
+			// Focus on the contentWindow
+			this.editor.contentWindow.focus();
+			
+			// Take an other look at the command and look for the perfect action and execute it
+			this.runCMD( command );
 
-            // Get the command
-            var command = $(that).attr("data-command");
-
-            // Focus on the contentWindow
-            this.editor.contentWindow.focus();
-
-            // Take an other look at the command and look for the perfect action and execute it
-            this.runCMD( command );
-
-            // And focus back again on the contentWindow
-            this.editor.contentWindow.focus();				
+			// And focus back again on the contentWindow
+			this.editor.contentWindow.focus();				
 		}, 
 		
 		/**
@@ -345,17 +338,16 @@
 		*/		
         runCMD: function( cmd ) {
 
-          // Check the command and run it
-          switch( cmd ) {
-            case "image" :
-              var image = prompt("URL (example: http://www.google.com): ");
-              return this.editor.contentWindow.document.execCommand( "InsertImage", false, image);
-            case "link" :
-              var link = prompt("URL (example: http://www.google.com): ");
-              return this.editor.contentWindow.document.execCommand( "CreateLink", false, link);
-            default :
-              return this.editor.contentWindow.document.execCommand( cmd );
-          }
+	        // Check command for special actions and run it
+	        if( cmd === "image" ) {
+		        var image = prompt("URL (example: http://www.google.com): ");
+		        return this.editor.contentWindow.document.execCommand( "InsertImage", false, image);	          
+		    } else if( cmd === "link" ) {
+			    var link = prompt("URL (example: http://www.google.com): ");
+			    return this.editor.contentWindow.document.execCommand( "CreateLink", false, link);	          
+			} else {
+	            return this.editor.contentWindow.document.execCommand( cmd );
+            }
         },
         
 		/**
@@ -426,8 +418,7 @@
 
 			// Add the data to the textarea, where this plugin is attached too
 			this.el.html(postData);
-        }
-		
+		}
 	};
 	
 	
