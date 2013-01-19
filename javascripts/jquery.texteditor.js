@@ -253,12 +253,8 @@
 				// Check or the content is different
 				if( $( methods.editor ).contents().find("body").html() !== $(methods.el).text() ) {
 					
-					// Define some variables that go in the function
-					var oldText = $( methods.el ).text(),
-						newText = $( methods.editor ).contents().find("body").html();
-					
 					// Set the content changed to true
-					methods.settings.isContentChanged( true, oldText, newText );
+					methods.settings.isContentChanged( true );
 				} else {
 					
 					// The text is edited, but hasn't changed					
