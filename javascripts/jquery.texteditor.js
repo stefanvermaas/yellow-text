@@ -250,17 +250,11 @@
 			// Bind the keyup event, to check for changes
 			$( methods.editor ).contents().find("body").on("keyup", function(e) {
 				
-				// Check or the content is different
-				if( $( methods.editor ).contents().find("body").html() !== $(methods.el).text() ) {
-					
-					// Set the content changed to true
-					methods.settings.isContentChanged( true );
-				} else {
-					
-					// The text is edited, but hasn't changed					
-					// Set the content has changed to false
-					methods.settings.isContentChanged( false );
-				}				
+				// Check or the text is changed				
+				var changed = ( $( methods.editor ).contents().find("body").html() !== $(methods.el).text() ) ? true : false;
+				
+				// Call the callback
+				methods.isContentChanged( changed );
 			});
 						
 			// Bind to the submit event of the form
