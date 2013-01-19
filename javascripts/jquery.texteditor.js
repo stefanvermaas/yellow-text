@@ -247,7 +247,7 @@
 				}
 			});
 			
-			// Bind the keypress event, to check for changes
+			// Bind the keyup event, to check for changes
 			$( methods.editor ).contents().find("body").on("keyup", function(e) {
 				
 				// Check or the content is different
