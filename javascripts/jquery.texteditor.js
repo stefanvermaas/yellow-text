@@ -32,24 +32,25 @@
 			*
 			*/
 			this.settings = $.extend( {
-				"width"           : "100%",
-				"height"          : "300px",
-				"containerClass"  : "js-editor-container",
-				"buttonsClass"    : "js-editor-buttons",
-				"iFrameClass"     : "js-editor-iframe",
-				"formID"          : "js-editor-form",
-				"cleanOnSubmit"   : true,
-				"defaultFont"     : "Helvetica Neue, Helvetica, arial, sans-serief",
-				"defaultFontSize" : "1em",
-				"defaultFontColor": "#000000",
-				"defaultActions"  : "bold, underline, italic, strikethrough, align-left, align-center, align-right, unorderd-list, ordered-list, link, image"
+				width            : "100%",
+				height           : "300px",
+				containerClass   : "js-editor-container",
+				buttonsClass     : "js-editor-buttons",
+				iFrameClass      : "js-editor-iframe",
+				formID           : "js-editor-form",
+				cleanOnSubmit    : true,
+				defaultFont      : "Helvetica Neue, Helvetica, arial, sans-serief",
+				defaultFontSize  : "1em",
+				defaultFontColor : "#000000",
+				defaultActions   : "bold, underline, italic, strikethrough, align-left, align-center, align-right, unorderd-list, ordered-list, link, image",
+				isContentChanged : function() {}
 			}, options);
 			
 			// Render the plugin
 			this.render();
 			
 			// Grap the content and put it in the iframe
-			this.getContent();			
+			this.setContent();			
 			
 			// Listen to events and react on them
 			this.events();
@@ -130,22 +131,20 @@
 		
 		/**
 		*
-		*	getContent
+		*	Content
 		*	=========================================
-		*	This function is called after the plugin
-		*	has initialized and it graps the content
-		*	that's inside the text field where the plugin
-		*	is attached too.
+		*	Graps the content from the textarea and puts
+		*	it in the text editor
 		*
 		*/		
-		getContent: function() {
+		setContent: function() {
 		
 			// Grap the content of the textarea
 			var content = $(this.el).text();
 	
 			// Put the content of the textarea into the editor
 			$( this.editor ).contents().find("body").append(content);
-		},		
+		},
 				
 		/**
 		*
@@ -231,34 +230,51 @@
 		*
 		*/		
 		events: function() {
-		
-			// Define that
-			var that = this;
-			
+
 			// Bind to the click event on the buttons
-			$("." + this.settings.buttonsClass + " a").on("click", function(e) {
+			$("." + methods.settings.buttonsClass + " a").on("click", function(e) {
 				
 				// React on the button event
-				that.buttonClicked( e, this );
+				methods.buttonClicked( e, this );
 			});
 			
-			// Bind to the keypress event while typing
-			$( this.editor ).contents().find("body").on("keydown", function(e) {
+			// Bind to the keydown event while typing
+			$( methods.editor ).contents().find("body").on("keydown", function(e) {
 				
 				// Check for a specific keycode
 				if( e.ctrlKey || e.metaKey ) {
-					that.shortkey( e, this );
+					methods.shortkey( e, this );
 				}
 			});
 			
+			// Bind the keypress event, to check for changes
+			$( methods.editor ).contents().find("body").on("keyup", function(e) {
+				
+				// Check or the content is different
+				if( $( methods.editor ).contents().find("body").html() !== $(methods.el).text() ) {
+					
+					// Define some variables that go in the function
+					var oldText = $( methods.el ).text(),
+						newText = $( methods.editor ).contents().find("body").html();
+					
+					// Set the content changed to true
+					methods.settings.isContentChanged( true, oldText, newText );
+				} else {
+					
+					// The text is edited, but hasn't changed					
+					// Set the content has changed to false
+					methods.settings.isContentChanged( false );
+				}				
+			});
+						
 			// Bind to the submit event of the form
-			$( this.settings.formID ).on("submit", function(e) {
+			$( methods.settings.formID ).on("submit", function(e) {
 				
 				// First clean the code
-				this.cleanTheCode();
+				methods.cleanTheCode();
 				
 				// Put the content back in the textfield
-				this.putContentBack();
+				methods.putContentBack();
 			}); 
 			
 		},
@@ -431,8 +447,8 @@
 			// Check for methods
 			if ( methods[method] ) {
 				
-				// This is a method, make sure this happens ( not used in v0.2 )
-				return methods[method].apply( this, Array.prototype.slice.call( method, 1 ));
+				// Target a specific function
+				return methods[method].apply( this, Array.prototype.slice.call( arguments, 1 ) );
 			} else if ( typeof method === 'object' || ! method ) {
 				
 				// No specific method is found, just initialize the plugin

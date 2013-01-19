@@ -1,0 +1,1 @@
+$(function(){$("#js-textarea").texteditor({defaultFont:"Georgia",isContentChanged:function(e,t,n){e?console.log("Aangepast"):console.log("Niet aangepast")}})});
