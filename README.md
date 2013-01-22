@@ -5,7 +5,7 @@ Editing text shouldn't be a pain. It should be simple. It should be pretty. With
 This lightweight jQuery plugin ( minified it's just 4.5kb !!! ) can be used to make your text editing proces a lot easier and more fun. The text editor only contains the most basic functions you need for editing text.
 
 ### Install
-**Step 1:** Using this plugin is really simple. Just download the source code from GitHub and include the jquery.texteditor-min.js ( for live websites ) or jquery.texteditor.js. You're almost good to go now!
+**Step 1:** Using this plugin is really simple. Just download the source code from GitHub and include the jquery.texteditor-min.js ( for live websites ) or jquery.texteditor.js ( for local websites ). 
 
 ```javascript
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script> <!-- include jquery -->
@@ -13,19 +13,63 @@ This lightweight jQuery plugin ( minified it's just 4.5kb !!! ) can be used to m
 ```
 
 **Step 2:** 
-Make sure the form ID is correct to make sure the plugin will listen to the right form.
-
-```javascript
-$("#js-your-html-element").texteditor({ formID: "my-form-id" })
-```
-
-**Step 3:** The only thing we need to do now is call the plugin to see the text editor shine.
+Make sure you call the plugin by it's name
 
 ```javascript
 $("#js-your-html-element").texteditor();
 ```
 
-**Step 4:** And finished! Wasn't that hard huh?!
+**Step 3:**
+The last thing we need to do, is tell the plugin to listen to the right form. So make sure you'll give your fantastic form an ID and tell the text editor about it.
+
+```javascript
+$("#js-your-html-element").texteditor({ formID: "my-form-id" })
+```
+
+**Step 4:** Annnnnnnnnnd... finished! Wasn't that hard huh?!
+
+### Callbacks
+In v0.3 are two new callback functions introduced. The're called: setImage and isContentChanged.
+
+#### setImage
+This function makes it possible to use an other jQuery / javasscript plugin to upload or insert an image to the text editor. Using this callback is easy:
+
+```javascript
+$(function() {
+    $("#js-textarea").texteditor({
+        setImage: function() {
+
+            // Grap the image
+            var image = "http://link.com";
+
+            // Return the image back to Yellow Text
+            return image;           
+        }
+    });
+});
+```
+
+Just make sure you return the image, you've just uploaded, and it will be all fine!
+
+#### isContentChanged
+Want to know or your content is changed, so you can do fancy stuff with it like enable or disable your save button? Just listen to this callback and it will give you the right informatie.
+
+The function has one single parameter, which is a boolean, that can be used like this;
+
+```javascript
+$(function() {
+    $("#js-textarea").texteditor({
+    	isContentChanged: function( changed ) {
+    		
+    		// Check or the content is changed
+    		var changes = ( changed === true ) ? "content is changed" : "content hasn't changed";
+    		
+    		// Log the changes
+    		console.log( changes );    		
+    	}
+    });
+});
+```
 
 ### Theme
 You'll see that the plugin ships with a simple, but beautiful theme, that's build with [SASS](http://sass-lang.com/) and [Compass](http://compass-style.org/). If you're not already familiar with SASS and Compass, you should definitly check it out.
