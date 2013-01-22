@@ -7,18 +7,23 @@ This lightweight jQuery plugin ( minified it's just 4.5kb !!! ) can be used to m
 ### Install
 **Step 1:** Using this plugin is really simple. Just download the source code from GitHub and include the jquery.texteditor-min.js ( for live websites ) or jquery.texteditor.js. You're almost good to go now!
 
-`<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script> <!-- include jquery -->`
-
-`<script type="text/javascript" src="javascripts/jquery.texteditor-min.js"></script> <!-- include the texteditor script -->`
+```javascript
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script> <!-- include jquery -->
+<script type="text/javascript" src="javascripts/jquery.texteditor-min.js"></script> <!-- include the texteditor script -->
+```
 
 **Step 2:** 
 Make sure the form ID is correct to make sure the plugin will listen to the right form.
 
-`$("#js-your-html-element").texteditor({ formID: "my-form-id" })`
+```javascript
+$("#js-your-html-element").texteditor({ formID: "my-form-id" })
+```
 
 **Step 3:** The only thing we need to do now is call the plugin to see the text editor shine.
 
-`$("#js-your-html-element").texteditor();`
+```javascript
+$("#js-your-html-element").texteditor();
+```
 
 **Step 4:** And finished! Wasn't that hard huh?!
 
@@ -37,3 +42,4 @@ As long as you retain this notice you can do whatever you want with this stuff. 
 ### Changelog
 - v0.1: Very raw first version of the plugin
 - v0.2: First stable version of the plugin. Rebuild v0.1 from the ground to make it more robust.
+- v0.3: Added two new callback functions: setImage and isContentChanged

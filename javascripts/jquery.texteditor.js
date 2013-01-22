@@ -4,7 +4,7 @@
 *	This plugin is created to make text editing
 *	more fun and to make it easy for the editor.
 *
-*	Version: 0.2
+*	Version: 0.3
 *	Author: Stefan Vermaas
 *	URL: www.stefanvermaas.nl
 *
@@ -46,7 +46,7 @@
 				
 				// Callbacks
 				isContentChanged : function() {},
-				setImage      : function() {}
+				setImage         : function() {}
 			}, options);
 			
 			// Render the plugin
