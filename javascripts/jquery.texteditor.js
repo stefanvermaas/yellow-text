@@ -45,7 +45,8 @@
 				defaultActions   : "bold, underline, italic, strikethrough, align-left, align-center, align-right, unorderd-list, ordered-list, link, image",
 				
 				// Callbacks
-				isContentChanged : function() {}
+				isContentChanged : function() {},
+				setImage      : function() {}
 			}, options);
 			
 			// Render the plugin
@@ -256,7 +257,7 @@
 				var changed = ( $( methods.editor ).contents().find("body").html() !== $(methods.el).text() ) ? true : false;
 				
 				// Call the callback
-				methods.isContentChanged( changed );
+				methods.settings.isContentChanged( changed );
 			});
 						
 			// Bind to the submit event of the form
@@ -343,13 +344,23 @@
 		*	can be used by every other function as long
 		*	as it provides a command to execute.
 		*
-		*/		
+		*/				
 		runCMD: function( cmd ) {
 
 	        // Check command for special actions and run it
 	        if( cmd === "image" ) {
-		        var image = prompt("URL (example: http://www.google.com): ");
-		        return methods.editor.contentWindow.document.execCommand( "InsertImage", false, image);	          
+		        
+		        // Check for the insertImage function, this will always be true
+		        if( typeof methods.settings.setImage === "function" ) {
+			        var image = methods.settings.setImage.call();
+		        }
+		        
+		        // Check or a other plugin or CMS added an image to the plugin
+		        var url = ( typeof image !== "undefined" && image.length > 0 ) ? image : prompt("URL (example: http://www.google.com): ");
+		        
+		        // Insert the image in the text editor
+		        return methods.editor.contentWindow.document.execCommand( "InsertImage", false, url);
+		        
 		    } else if( cmd === "link" ) {
 			    var link = prompt("URL (example: http://www.google.com): ");
 			    return methods.editor.contentWindow.document.execCommand( "CreateLink", false, link);	          
