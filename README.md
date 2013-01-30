@@ -19,14 +19,7 @@ Make sure you call the plugin by it's name
 $("#js-your-html-element").texteditor();
 ```
 
-**Step 3:**
-The last thing we need to do, is tell the plugin to listen to the right form. So make sure you'll give your fantastic form an ID and tell the text editor about it.
-
-```javascript
-$("#js-your-html-element").texteditor({ formID: "my-form-id" })
-```
-
-**Step 4:** Annnnnnnnnnd... finished! Wasn't that hard huh?!
+**Step 3:** Annnnnnnnnnd... finished! Wasn't that hard huh?!
 
 ### Callbacks
 In v0.3 are two new callback functions introduced. The're called: setImage and isContentChanged.

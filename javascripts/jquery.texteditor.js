@@ -37,7 +37,6 @@
 				containerClass   : "js-editor-container",
 				buttonsClass     : "js-editor-buttons",
 				iFrameClass      : "js-editor-iframe",
-				formID           : "js-editor-form",
 				cleanOnSubmit    : true,
 				defaultFont      : "Helvetica Neue, Helvetica, arial, sans-serief",
 				defaultFontSize  : "1em",
@@ -261,7 +260,7 @@
 			});
 						
 			// Bind to the submit event of the form
-			$( methods.settings.formID ).on("submit", function(e) {
+			$( methods.el ).parents("form").on("submit", function(e) {
 				
 				// First clean the code
 				methods.cleanTheCode();
