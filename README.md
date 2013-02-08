@@ -80,3 +80,4 @@ As long as you retain this notice you can do whatever you want with this stuff. 
 - v0.1: Very raw first version of the plugin
 - v0.2: First stable version of the plugin. Rebuild v0.1 from the ground to make it more robust.
 - v0.3: Added two new callback functions: setImage and isContentChanged
+- - V0.3.1: Fixed the post bug. Plugin could not post the right data

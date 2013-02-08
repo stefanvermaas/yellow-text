@@ -4,7 +4,7 @@
 *	This plugin is created to make text editing
 *	more fun and to make it easy for the editor.
 *
-*	Version: 0.3
+*	Version: 0.3.1
 *	Author: Stefan Vermaas
 *	URL: www.stefanvermaas.nl
 *
@@ -435,7 +435,7 @@
 			var postData = $(methods.editor).contents().find("body").html();
 
 			// Add the data to the textarea, where this plugin is attached too
-			methods.el.html(postData);
+			$( methods.el ).html(postData);
 		}
 	};
 	
