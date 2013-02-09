@@ -4,7 +4,7 @@
 *	This plugin is created to make text editing
 *	more fun and to make it easy for the editor.
 *
-*	Version: 0.3.1
+*	Version: 0.3.2
 *	Author: Stefan Vermaas
 *	URL: www.stefanvermaas.nl
 *
@@ -433,9 +433,9 @@
 		putContentBack: function() {
 			// Grap the content of the iframe
 			var postData = $(methods.editor).contents().find("body").html();
-
-			// Add the data to the textarea, where this plugin is attached too
-			$( methods.el ).html(postData);
+			
+			// Make sure the textarea is empty and add the new data
+			$( methods.el ).empty().html( postData );
 		}
 	};
 	
