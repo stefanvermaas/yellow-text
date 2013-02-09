@@ -409,15 +409,17 @@
 			
 			// Unwrap all br tags and remove the ugly div tags
 			body.find("br").unwrap();
-						
-			// Find the first line
-			var firstLine = body.contents()[0];
+		      
+		    // Get fancy stuff done with the first line	
+			var firstLine = "<p>" + $( body.contents()[0] ).html() + "</p>";
 			
-			// Check or the first line has a p tag surrounding it
-			if( body.find(firstLine).not("p") ) {
-				// The first line does not have a p tag
-				body.find(firstLine).wrap("p");
-			}
+			// Remove the first line
+			$( body.contents()[0] ).remove();
+			
+			// Add the line on the first line
+			body.prepend( firstLine );
+			
+			console.log( body.contents()[0] );
 		},
         
 		/**
@@ -434,8 +436,8 @@
 			// Grap the content of the iframe
 			var postData = $(methods.editor).contents().find("body").html();
 			
-			// Make sure the textarea is empty and add the new data
-			$( methods.el ).val("").html( postData );
+			// Make sure the textarea is empty
+			$( methods.el ).val( postData );
 		}
 	};
 	
