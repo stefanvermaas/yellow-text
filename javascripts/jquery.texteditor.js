@@ -418,8 +418,6 @@
 			
 			// Add the line on the first line
 			body.prepend( firstLine );
-			
-			console.log( body.contents()[0] );
 		},
         
 		/**
