@@ -435,7 +435,7 @@
 			var postData = $(methods.editor).contents().find("body").html();
 			
 			// Make sure the textarea is empty and add the new data
-			$( methods.el ).empty().html( postData );
+			$( methods.el ).val("").html( postData );
 		}
 	};
 	
