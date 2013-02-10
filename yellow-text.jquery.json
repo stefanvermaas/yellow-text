@@ -1,12 +1,11 @@
 {
-    "name": "Yellow Text",
-    "title": "Yellow Text is a beautiful text editor which makes editing text fun again",
+    "name": "yellow-text",
+    "title": "Yellow Text is a beautiful text editor which makes creating content fun again",
     "keywords": [
         "YellowText",
-        "text editor",
-        "rich text editor"
+        "texteditor"
     ],
-    "version": "0.3.2",
+    "version": "0.3.4",
     "author": {
         "name": "Stefan Vermaas",
         "url": "http://www.stefanvermaas.nl"
@@ -21,7 +20,7 @@
     "licenses": [
         {
             "type": "BEERWARE",
-            "url": "https://github.com/stefanvermaas/yellow-text"
+            "url": "https://github.com/stefanvermaas/yellow-text"            
         }
     ],
     "bugs": "https://github.com/stefanvermaas/yellow-text/issues",
