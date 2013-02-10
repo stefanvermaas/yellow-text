@@ -82,4 +82,4 @@ As long as you retain this notice you can do whatever you want with this stuff. 
 - v0.3: Added two new callback functions: setImage and isContentChanged.
 - V0.3.1: Fixed the post bug. Plugin could not post the right data.
 - v0.3.2: Fixed the bug where the content was doubled / extra added to the field on submit.
-- v0.3.3 - v0.3.8: Fixed the jQuery manifest file. Had to try a couple of times.
+- v0.3.3 - v0.4.0: Fixed the jQuery manifest file. Had to try a couple of times.
