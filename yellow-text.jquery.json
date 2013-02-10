@@ -1,11 +1,12 @@
 {
     "name": "yellow-text",
-    "title": "Yellow Text is a beautiful text editor which makes creating content fun again",
+    "title": "Yellow Text",
+    "description": "Yellow Text is a beautiful text editor which makes creating content fun again. It ships with a beautiful theme and really clever shortkeys."
     "keywords": [
         "YellowText",
         "texteditor"
     ],
-    "version": "0.3.7",
+    "version": "0.3.8",
     "author": {
         "name": "Stefan Vermaas",
         "url": "http://www.stefanvermaas.nl"
