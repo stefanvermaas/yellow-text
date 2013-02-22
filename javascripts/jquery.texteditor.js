@@ -4,7 +4,7 @@
 *	This plugin is created to make text editing
 *	more fun and to make it easy for the editor.
 *
-*	Version: 0.3.2
+*	Version: 0.4.1
 *	Author: Stefan Vermaas
 *	URL: www.stefanvermaas.nl
 *
@@ -408,7 +408,7 @@
 			});
 			
 			// Unwrap all br tags and remove the ugly div tags
-			body.find("br").unwrap();
+			body.find("br").removeAttr("class").unwrap();
 		      
 		    // Get fancy stuff done with the first line	
 			var firstLine = "<p>" + $( body.contents()[0] ).html() + "</p>";
