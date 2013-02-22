@@ -41,7 +41,7 @@
 				defaultFont      : "Helvetica Neue, Helvetica, arial, sans-serief",
 				defaultFontSize  : "1em",
 				defaultFontColor : "#000000",
-				defaultActions   : "bold, underline, italic, strikethrough, align-left, align-center, align-right, unorderd-list, ordered-list, link, image",
+				defaultActions   : "bold, underline, italic, strikethrough, align-left, align-center, align-right, unordered-list, ordered-list, link, image",
 				
 				// Callbacks
 				isContentChanged : function() {},
@@ -191,7 +191,7 @@
 					case "align-right" :
 						button = { content : "right", command : "JustifyRight" };
 					break;
-					case "unorderd-list" :
+					case "unordered-list" :
 						button = { content : "ul", command : "InsertUnorderedList" };
 					break;
 					case "ordered-list" :
