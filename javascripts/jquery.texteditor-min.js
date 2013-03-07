@@ -4,7 +4,7 @@
 *	This plugin is created to make text editing
 *	more fun and to make it easy for the editor.
 *
-*	Version: 0.4.1
+*	Version: 0.4.2
 *	Author: Stefan Vermaas
 *	URL: www.stefanvermaas.nl
 *

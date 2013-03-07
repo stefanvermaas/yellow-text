@@ -84,3 +84,4 @@ As long as you retain this notice you can do whatever you want with this stuff. 
 - v0.3.2: Fixed the bug where the content was doubled / extra added to the field on submit.
 - v0.3.3 - v0.4.0: Fixed the jQuery manifest file. Had to try a couple of times.
 - v0.4.1: Now removing classes from br tags.
+- v0.4.2: Fixed the NULL bug.
