@@ -120,8 +120,11 @@
 				"color"         : methods.settings.defaultFontColor
 			});
 			
+			// Add a p tag to make sure browsers don't add div's
+			$(methods.editor).contents().find("body").append("<p><br /></p>");
+			
 			// Add some css to the iFrame
-			var iFrameCSS = '<style type="text/css">body{padding: 2%;} p { margin: 0; }</style>';
+			var iFrameCSS = '<style type="text/css">body{padding:2%;}p{margin:0;}</style>';
 			$(methods.editor).contents().find("head").append(iFrameCSS);
 			
 			// Build the button container
@@ -208,11 +211,7 @@
 				}
 				
 		        // Build the buttons and add before the container
-		        $("<a />")
-		        	.addClass( button.command )
-		        	.text( button.content )
-		        	.attr( "data-command", button.command )
-		        	.appendTo( methods.buttons );
+		        $("<a />").addClass( button.command ).text( button.content ).data( "command", button.command ).appendTo( methods.buttons );
 			}
 		},
 		
@@ -236,17 +235,28 @@
 			// Bind to the click event on the buttons
 			$("." + methods.settings.buttonsClass + " a").on("click", function(e) {
 				
+				// Get the command
+				var command = $(this).data("command");				
+				
 				// React on the button event
-				methods.buttonClicked( e, this );
+				methods.buttonClicked( e, command );
+				
+				// Check for ul or ol
+				if( command === "InsertUnorderedList" || command === "InsertOrderedList" ) {
+    				
+    				// Clean all the UL's and OL's
+    				methods.cleanLists( command );
+				}
 			});
 			
 			// Bind to the keydown event while typing
 			$( methods.editor ).contents().find("body").on("keydown", function(e) {
 				
-				// Check for a specific keycode
+    			// Look for the control or command key
 				if( e.ctrlKey || e.metaKey ) {
 					methods.shortkey( e, this );
 				}
+				
 			});
 			
 			// Bind the keyup event, to check for changes
@@ -280,10 +290,7 @@
 		*	action will be triggered
 		*
 		*/
-		buttonClicked: function( e, that ) {
-			
-			// Get the command
-			var command = $(that).attr("data-command");
+		buttonClicked: function( e, command ) {
 			
 			// Focus on the contentWindow
 			methods.editor.contentWindow.focus();
@@ -310,28 +317,33 @@
 		*/		
 		shortkey: function( e ) {
 			
-			// Define command
-			var command;			
+			// Define the key
+			var key = e.which;
 			
-			// Focus on the contentWindow
-			methods.editor.contentWindow.focus();
-			
-			// Detect for simple actions their functions
-			if( e.which === 66 ) { 
-				command = "bold";
-			} else if( e.which === 73 ) { 
-				command = "italic";
-			} else if( e.which === 85 ) {
-				command = "underline";
-			} else {
-				command = "";
+			// Check or we have on of the right keys
+			if( key === 66 || key === 73 || key === 85 ) {
+
+    			// Focus on the content window
+    			methods.editor.contentWindow.focus();
+    			
+    			// Handle the action
+    			switch( key ) {
+        			case 66:
+        			methods.runCMD("bold");
+        			break;
+        			
+        			case 73:
+        			methods.runCMD("italic");
+        			break;
+        			
+        			case 85:
+        			methods.runCMD("underline");
+        			break;
+    			}
+
+    			// And focus back again on the contentWindow
+    			methods.editor.contentWindow.focus();
 			}
-			
-			// Run the command
-			methods.runCMD( command );
-			
-			// And focus back again on the contentWindow
-			methods.editor.contentWindow.focus();	
 		},
 		
 		/**
@@ -372,52 +384,24 @@
 		*
 		*	cleanTheCode
 		*	=========================================
-		*	Now we're cleaning up someone's shit. The 
-		*	browsers insert really nasty code ( not semantic )
-		*	in our text editor, but that won't stop us!
-		*
-		*	We're gonna fight back. This function cleans
-		*	the code and makes it pretty. Just like we want too.
+		*   This part of the plugin cleans up the browser
+		*   mess.
 		*
 		*/        
 		cleanTheCode: function() {
 			
-			// Define the body element
-			var body = $(methods.editor).contents().find("body");
-			
-			// Loop through each div tag and change it to a p tag
-			body.find("div").each( function() {
-				// Get the class if avaiable
-				var hasStyle = ( $(this).attr("style") ) ? true : false;
-			
-				// Check or a element is not wrapped
-				if( $(this).parent("p").not("p") ) {
-			
-					// Change the div elements to normal p tags
-					if( hasStyle ) {
-						// Wrap the content into p tags with the style
-						$(this).wrap("<p style=\"" + $(this).attr('style') + "\"></p>");
-					} else {
-						// Wrap the content into p tags
-						$(this).wrap("<p></p>");
-					}
-				}
-			
-				// Unwrap all the div tags
-				$(this).contents().unwrap();
-			});
-			
 			// Unwrap all br tags and remove the ugly div tags
-			body.find("br").removeAttr("class").unwrap();
-		      
-		    // Get fancy stuff done with the first line	
-			var firstLine = "<p>" + $( body.contents()[0] ).html() + "</p>";
+			$(methods.editor).contents().find("body").find("br").removeAttr("class").unwrap();
 			
-			// Remove the first line
-			$( body.contents()[0] ).remove();
-			
-			// Add the line on the first line
-			body.prepend( firstLine );
+		},
+		
+		cleanLists: function( command ) {
+    		
+    		// Detect the type    		
+    		var type = ( command === "InsertUnorderedList" ) ? "ul" : "ol";
+    		
+    		// Remove the UL or OL
+    		$(methods.editor).contents().find("body").find(type).removeAttr("class").unwrap();
 		},
         
 		/**
