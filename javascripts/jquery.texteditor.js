@@ -366,7 +366,7 @@
 			        var image = methods.settings.setImage.call();
 		        }
 		        
-		        // Check or a other plugin or CMS added an image to the plugin
+		        // Check or an other plugin or CMS added an image to the plugin
 		        var url = ( typeof image !== "undefined" && image.length > 0 ) ? image : prompt("URL (example: http://www.google.com): ");
 		        
 		        // Insert the image in the text editor
