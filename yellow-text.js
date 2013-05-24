@@ -34,7 +34,6 @@
 			*	during intialization of the plugin.
 			*
 			*	For an example, see javascripts/demo.js
-			*
 			*/
 			methods.settings = $.extend( {
 				width            : '100%',
@@ -46,7 +45,7 @@
 				defaultFont      : 'Helvetica Neue, Helvetica, arial, sans-serief',
 				defaultFontSize  : '1em',
 				defaultFontColor : '#000000',
-				defaultActions   : 'bold, underline, italic, strikethrough, align-left, align-center, align-right, unordered-list, ordered-list, link, image',
+				defaultActions   : ['bold, underline, italic, strikethrough, align-left, align-center, align-right, unordered-list, ordered-list, link, image'],
 
 				// Callbacks
 				isContentChanged : noop,
@@ -166,11 +165,8 @@
 		*/
 		createButtons: function() {
 
-			// Define the 'to make buttons'
-			var defaultOptions = methods.settings.defaultActions.split(/, ?/);
-
 			// Loop through all the buttons
-			for( var i = 0; i < defaultOptions.length; i++ ) {
+			for( var i = 0; i < methods.settings.defaultActions.length; i++ ) {
 
 				// Create a variable to store the object in
 				var button;
