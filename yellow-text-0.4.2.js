@@ -85,7 +85,6 @@
 		*	=========================================
 		*	This function renders the whole plugin and
 		*	it's only used to build the plugin.
-		*
 		*/
 		render: function() {
 
@@ -223,34 +222,29 @@
 		events: function() {
 
 			// Bind to the click event on the buttons
-			$('.' + methods.settings.buttonsClass + ' a').on('click', function(e) {
+			$('.' + methods.settings.buttonsClass + ' a').on('click', function( e ) {
 
-				// Get the command
+				// Grap the command and react on event
 				var command = $(this).data('command');
-
-				// React on the button event
 				methods.buttonClicked( e, command );
 
 				// Check for ul or ol
 				if( command === 'InsertUnorderedList' || command === 'InsertOrderedList' ) {
-
-    				// Clean all the UL's and OL's
-    				methods.cleanLists( command );
+					methods.cleanLists( command );
 				}
 			});
 
 			// Bind to the keydown event while typing
-			$( methods.editor ).contents().find('body').on('keydown', function(e) {
+			$( methods.editor ).contents().find('body').on('keydown', function( e ) {
 
-    			// Look for the control or command key
+				// Look for the control or command key
 				if( e.ctrlKey || e.metaKey ) {
 					methods.shortkey( e, this );
 				}
-
 			});
 
 			// Bind the keyup event, to check for changes
-			$( methods.editor ).contents().find('body').on('keyup', function(e) {
+			$( methods.editor ).contents().find('body').on('keyup', function( e ) {
 
 				// Check or the text is changed
 				var changed = ( $( methods.editor ).contents().find('body').html() !== $(methods.el).text() ) ? true : false;
@@ -268,7 +262,6 @@
 				// Put the content back in the textfield
 				methods.putContentBack();
 			});
-
 		},
 
 		/**
@@ -278,7 +271,6 @@
 		*	This function reacts on the fact that a
 		*	button is clicked. Based on the button an
 		*	action will be triggered
-		*
 		*/
 		buttonClicked: function( e, command ) {
 
