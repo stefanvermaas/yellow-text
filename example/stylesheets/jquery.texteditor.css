@@ -41,7 +41,7 @@
   font: 16px Georgia;
   text-align: center;
   text-transform: uppercase;
-  text-shadow: 0 1px white;
+  text-shadow: 0 1px #fff;
   cursor: pointer;
 }
 
