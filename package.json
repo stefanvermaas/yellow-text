@@ -1,0 +1,13 @@
+{
+  "name": "yellow-text",
+  "version": "0.4.2",
+  "description": "Yellow Text is a simple but very clever rich text editor",
+  "repository": "git@github.com:stefanvermaas/yellow-text.git",
+  "author": "Stefan Vermaas",
+  "license": "BEERWARE",
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-contrib-jasmine": "~0.4.2",
+    "grunt-contrib-watch": "~0.4.3"
+  }
+}
