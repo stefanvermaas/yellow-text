@@ -6,7 +6,7 @@ module.exports = function( grunt ) {
 
     // Define Jasmine task options.
     jasmine: {
-      src: 'yellow-text-<%= pkg.version %>.js',
+      src: 'yellow-text.js',
       options: {
         vendor: 'http://cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js',
         outfile: 'specs.html',
@@ -17,7 +17,7 @@ module.exports = function( grunt ) {
     // Define Watch task options.
     watch: {
       scripts: {
-        files: ['yellow-text-<%= pkg.version %>.js', 'test/yellow-text-<%= pkg.version %>.spec.js'],
+        files: ['yellow-text.js', 'test/yellow-text-<%= pkg.version %>.spec.js'],
         tasks: 'default'
       }
     }
