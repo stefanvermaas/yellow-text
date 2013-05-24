@@ -63,6 +63,24 @@
 
 		/**
 		*
+		*	Content
+		*	=========================================
+		*	There're two functions that are used to get
+		*	and set the content of the text editor.
+		*
+		*	The setContent function needs content. Usually
+		* this will come from the getContent() function.
+		*/
+		setContent: function( content ) {
+			$( methods.editor ).contents().find('body').append( content );
+		},
+
+		getContent: function() {
+			return $( methods.el ).text();
+		},
+
+		/**
+		*
 		*	Render
 		*	=========================================
 		*	This function renders the whole plugin and
@@ -70,23 +88,6 @@
 		*
 		*/
 		render: function() {
-
-			// Render the new text editor
-			methods.createTextEditor();
-
-			// Render the buttons
-			methods.createButtons();
-		},
-
-		/**
-		*
-		*	createTextEditor
-		*	=========================================
-		*	This part of the plugin builds the main
-		*	elements of the new text editor
-		*
-		*/
-		createTextEditor: function() {
 
 			// Hide the current text field
 			$(methods.el).hide();
@@ -135,29 +136,9 @@
 				'float'   : 'left',
 				'width'   : methods.settings.width
 			}).prependTo( methods.container );
-		},
 
-		/**
-		*
-		*	Content
-		*	=========================================
-		*	There're two functions that are used to get
-		*	and set the content of the text editor.
-		*
-		*	The setContent function needs content. Usually
-		* this will come from the getContent() function.
-		*/
-		setContent: function( content ) {
-
-			// Put the content of the textarea into the editor
-			$( methods.editor ).contents().find('body').append( content );
-		},
-
-		getContent: function() {
-
-			// Get the content
-			var content = $( methods.el ).text();
-			return content;
+			// Render the buttons
+			methods.createButtons();
 		},
 
 		/**
@@ -219,8 +200,8 @@
 						button = { content : '', command : '' };
 				}
 
-		        // Build the buttons and add before the container
-		        $('<a />').addClass( button.command ).text( button.content ).data( 'command', button.command ).appendTo( methods.buttons );
+				// Build the buttons and add before the container
+				$('<a />').addClass( button.command ).text( button.content ).data( 'command', button.command ).appendTo( methods.buttons );
 			}
 		},
 
