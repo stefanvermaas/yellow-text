@@ -32,16 +32,16 @@
 			*
 			*/
 			methods.settings = $.extend( {
-				width            : "100%",
-				height           : "300px",
-				containerClass   : "js-editor-container",
-				buttonsClass     : "js-editor-buttons",
-				iFrameClass      : "js-editor-iframe",
+				width            : '100%',
+				height           : '300px',
+				containerClass   : 'js-editor-container',
+				buttonsClass     : 'js-editor-buttons',
+				iFrameClass      : 'js-editor-iframe',
 				cleanOnSubmit    : true,
-				defaultFont      : "Helvetica Neue, Helvetica, arial, sans-serief",
-				defaultFontSize  : "1em",
-				defaultFontColor : "#000000",
-				defaultActions   : "bold, underline, italic, strikethrough, align-left, align-center, align-right, unordered-list, ordered-list, link, image",
+				defaultFont      : 'Helvetica Neue, Helvetica, arial, sans-serief',
+				defaultFontSize  : '1em',
+				defaultFontColor : '#000000',
+				defaultActions   : 'bold, underline, italic, strikethrough, align-left, align-center, align-right, unordered-list, ordered-list, link, image',
 
 				// Callbacks
 				isContentChanged : function() {},
@@ -89,48 +89,48 @@
 			$(methods.el).hide();
 
 			// Create a container which will hold or text editor
-			methods.container = $("<div />").addClass( methods.settings.containerClass ).css({
-				"float"   : "left",
-				"width"   : methods.settings.width,
-				"border"  : "1px solid #ccc"
+			methods.container = $('<div />').addClass( methods.settings.containerClass ).css({
+				'float'   : 'left',
+				'width'   : methods.settings.width,
+				'border'  : '1px solid #ccc'
 			});
 
 			// Add the container after the element where we bind this plugin too
 			$(methods.el).after( methods.container );
 
 			// Create the iFrame and append to the previously created container
-			methods.editor = $("<iframe />").addClass( methods.settings.iFrameClass ).css({
-				"float"   : "left",
-				"width"   : methods.settings.width,
-				"height"  : methods.settings.height,
-				"border"  : "0",
-				"overflow": "hidden"
+			methods.editor = $('<iframe />').addClass( methods.settings.iFrameClass ).css({
+				'float'   : 'left',
+				'width'   : methods.settings.width,
+				'height'  : methods.settings.height,
+				'border'  : '0',
+				'overflow': 'hidden'
 			}).appendTo( methods.container ).get(0);
 
 			// Make the editor work in all browsers
 			methods.editor.contentWindow.document.open();
 			methods.editor.contentWindow.document.close();
-			methods.editor.contentWindow.document.designMode="on";
+			methods.editor.contentWindow.document.designMode='on';
 
 			// Set the standard fonts etc
-			$(methods.editor).contents().find("body").css({
-				"word-wrap"     : "break-word",
-				"font-family"   : methods.settings.defaultFont,
-				"font-size"     : methods.settings.defaultFontSize,
-				"color"         : methods.settings.defaultFontColor
+			$(methods.editor).contents().find('body').css({
+				'word-wrap'     : 'break-word',
+				'font-family'   : methods.settings.defaultFont,
+				'font-size'     : methods.settings.defaultFontSize,
+				'color'         : methods.settings.defaultFontColor
 			});
 
 			// Add a p tag to make sure browsers don't add div's
-			$(methods.editor).contents().find("body").append("<p> </p>");
+			$(methods.editor).contents().find('body').append('<p> </p>');
 
 			// Add some css to the iFrame
 			var iFrameCSS = '<style type="text/css">body{padding:2%;}p{margin:0;}</style>';
-			$(methods.editor).contents().find("head").append(iFrameCSS);
+			$(methods.editor).contents().find('head').append(iFrameCSS);
 
 			// Build the button container
-			methods.buttons = $("<div />").addClass( methods.settings.buttonsClass ).css({
-				"float"   : "left",
-				"width"   : methods.settings.width
+			methods.buttons = $('<div />').addClass( methods.settings.buttonsClass ).css({
+				'float'   : 'left',
+				'width'   : methods.settings.width
 			}).prependTo( methods.container );
 		},
 
@@ -148,7 +148,7 @@
 			var content = $(methods.el).text();
 
 			// Put the content of the textarea into the editor
-			$( methods.editor ).contents().find("body").append(content);
+			$( methods.editor ).contents().find('body').append(content);
 		},
 
 		/**
@@ -162,7 +162,7 @@
 		*/
 		createButtons: function() {
 
-			// Define the "to make buttons"
+			// Define the 'to make buttons'
 			var defaultOptions = methods.settings.defaultActions.split(/, ?/);
 
 			// Loop through all the buttons
@@ -173,45 +173,45 @@
 
 				// Get the right value
 				switch( defaultOptions[i] ) {
-					case "bold" :
-						button = { content : "b", command : "bold" };
+					case 'bold' :
+						button = { content : 'b', command : 'bold' };
 					break;
-					case "underline" :
-						button = { content : "u", command : "underline" };
+					case 'underline' :
+						button = { content : 'u', command : 'underline' };
 					break;
-					case "italic" :
-						button = { content : "i", command : "italic" };
+					case 'italic' :
+						button = { content : 'i', command : 'italic' };
 					break;
-					case "strikethrough" :
-						button = { content : "s", command : "strikethrough" };
+					case 'strikethrough' :
+						button = { content : 's', command : 'strikethrough' };
 					break;
-					case "align-left" :
-						button = { content : "left", command : "JustifyLeft" };
+					case 'align-left' :
+						button = { content : 'left', command : 'JustifyLeft' };
 					break;
-					case "align-center" :
-						button = { content : "center", command : "JustifyCenter" };
+					case 'align-center' :
+						button = { content : 'center', command : 'JustifyCenter' };
 					break;
-					case "align-right" :
-						button = { content : "right", command : "JustifyRight" };
+					case 'align-right' :
+						button = { content : 'right', command : 'JustifyRight' };
 					break;
-					case "unordered-list" :
-						button = { content : "ul", command : "InsertUnorderedList" };
+					case 'unordered-list' :
+						button = { content : 'ul', command : 'InsertUnorderedList' };
 					break;
-					case "ordered-list" :
-						button = { content : "ol", command : "InsertOrderedList" };
+					case 'ordered-list' :
+						button = { content : 'ol', command : 'InsertOrderedList' };
 					break;
-					case "image" :
-						button = { content : "img", command : "image" };
+					case 'image' :
+						button = { content : 'img', command : 'image' };
 					break;
-					case "link" :
-						button = { content : "link", command : "link" };
+					case 'link' :
+						button = { content : 'link', command : 'link' };
 					break;
 					default :
-						button = { content : "", command : "" };
+						button = { content : '', command : '' };
 				}
 
 		        // Build the buttons and add before the container
-		        $("<a />").addClass( button.command ).text( button.content ).data( "command", button.command ).appendTo( methods.buttons );
+		        $('<a />').addClass( button.command ).text( button.content ).data( 'command', button.command ).appendTo( methods.buttons );
 			}
 		},
 
@@ -233,16 +233,16 @@
 		events: function() {
 
 			// Bind to the click event on the buttons
-			$("." + methods.settings.buttonsClass + " a").on("click", function(e) {
+			$('.' + methods.settings.buttonsClass + ' a').on('click', function(e) {
 
 				// Get the command
-				var command = $(this).data("command");
+				var command = $(this).data('command');
 
 				// React on the button event
 				methods.buttonClicked( e, command );
 
 				// Check for ul or ol
-				if( command === "InsertUnorderedList" || command === "InsertOrderedList" ) {
+				if( command === 'InsertUnorderedList' || command === 'InsertOrderedList' ) {
 
     				// Clean all the UL's and OL's
     				methods.cleanLists( command );
@@ -250,7 +250,7 @@
 			});
 
 			// Bind to the keydown event while typing
-			$( methods.editor ).contents().find("body").on("keydown", function(e) {
+			$( methods.editor ).contents().find('body').on('keydown', function(e) {
 
     			// Look for the control or command key
 				if( e.ctrlKey || e.metaKey ) {
@@ -260,17 +260,17 @@
 			});
 
 			// Bind the keyup event, to check for changes
-			$( methods.editor ).contents().find("body").on("keyup", function(e) {
+			$( methods.editor ).contents().find('body').on('keyup', function(e) {
 
 				// Check or the text is changed
-				var changed = ( $( methods.editor ).contents().find("body").html() !== $(methods.el).text() ) ? true : false;
+				var changed = ( $( methods.editor ).contents().find('body').html() !== $(methods.el).text() ) ? true : false;
 
 				// Call the callback
 				methods.settings.isContentChanged( changed );
 			});
 
 			// Bind to the submit event of the form
-			$( methods.el ).parents("form").on("submit", function(e) {
+			$( methods.el ).parents('form').on('submit', function(e) {
 
 				// First clean the code
 				methods.cleanTheCode();
@@ -329,15 +329,15 @@
     			// Handle the action
     			switch( key ) {
         			case 66:
-        			methods.runCMD("bold");
+        			methods.runCMD('bold');
         			break;
 
         			case 73:
-        			methods.runCMD("italic");
+        			methods.runCMD('italic');
         			break;
 
         			case 85:
-        			methods.runCMD("underline");
+        			methods.runCMD('underline');
         			break;
     			}
 
@@ -359,22 +359,22 @@
 		runCMD: function( cmd ) {
 
 	        // Check command for special actions and run it
-	        if( cmd === "image" ) {
+	        if( cmd === 'image' ) {
 
 		        // Check for the insertImage function, this will always be true
-		        if( typeof methods.settings.setImage === "function" ) {
+		        if( typeof methods.settings.setImage === 'function' ) {
 			        var image = methods.settings.setImage.call();
 		        }
 
 		        // Check or a other plugin or CMS added an image to the plugin
-		        var url = ( typeof image !== "undefined" && image.length > 0 ) ? image : prompt("URL (example: http://www.google.com): ");
+		        var url = ( typeof image !== 'undefined' && image.length > 0 ) ? image : prompt('URL (example: http://www.google.com): ');
 
 		        // Insert the image in the text editor
-		        return methods.editor.contentWindow.document.execCommand( "InsertImage", false, url);
+		        return methods.editor.contentWindow.document.execCommand( 'InsertImage', false, url);
 
-		    } else if( cmd === "link" ) {
-			    var link = prompt("URL (example: http://www.google.com): ");
-			    return methods.editor.contentWindow.document.execCommand( "CreateLink", false, link);
+		    } else if( cmd === 'link' ) {
+			    var link = prompt('URL (example: http://www.google.com): ');
+			    return methods.editor.contentWindow.document.execCommand( 'CreateLink', false, link);
 			} else {
 	            return methods.editor.contentWindow.document.execCommand( cmd );
             }
@@ -391,17 +391,17 @@
 		cleanTheCode: function() {
 
 			// Unwrap all br tags and remove the ugly div tags
-			$(methods.editor).contents().find("body").find("br").removeAttr("class").unwrap();
+			$(methods.editor).contents().find('body').find('br').removeAttr('class').unwrap();
 
 		},
 
 		cleanLists: function( command ) {
 
     		// Detect the type
-    		var type = ( command === "InsertUnorderedList" ) ? "ul" : "ol";
+    		var type = ( command === 'InsertUnorderedList' ) ? 'ul' : 'ol';
 
     		// Remove the UL or OL
-    		$(methods.editor).contents().find("body").find(type).removeAttr("class").unwrap();
+    		$(methods.editor).contents().find('body').find(type).removeAttr('class').unwrap();
 		},
 
 		/**
@@ -416,7 +416,7 @@
 		*/
 		putContentBack: function() {
 			// Grap the content of the iframe
-			var postData = $(methods.editor).contents().find("body").html();
+			var postData = $(methods.editor).contents().find('body').html();
 
 			// Make sure the textarea is empty
 			$( methods.el ).val( postData );
