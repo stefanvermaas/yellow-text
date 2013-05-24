@@ -20,7 +20,7 @@
 	var methods = {
 
 		// Call the initialization function
-		init: function( that, options ) {
+		initialize: function( that, options ) {
 
 			// Create the global this element
 			methods.el = that;
@@ -396,7 +396,7 @@
 			if ( methods[method] ) {
 				return methods[method].apply( this, Array.prototype.slice.call( arguments, 1 ) );
 			} else if ( typeof method === 'object' || ! method ) {
-				return methods.init( this, method );
+				return methods.initialize( this, method );
 			} else {
 				$.error( 'Method ' +  method + ' does not exist on jQuery.texteditor' );
 			}
