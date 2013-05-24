@@ -11,6 +11,8 @@
 */
 (function( $ ) {
 
+	'use strict';
+
 	// Define an empty function
 	var noop = function() {};
 
@@ -168,7 +170,7 @@
 			var defaultOptions = methods.settings.defaultActions.split(/, ?/);
 
 			// Loop through all the buttons
-			for( i = 0; i < defaultOptions.length; i++ ) {
+			for( var i = 0; i < defaultOptions.length; i++ ) {
 
 				// Create a variable to store the object in
 				var button;
