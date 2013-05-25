@@ -11,6 +11,8 @@
 */
 (function( $ ) {
 
+  'use strict';
+
   // Define an empty function
   var noop = function() {};
 
@@ -18,7 +20,7 @@
   var methods = {
 
     // Call the initialization function
-    init: function( that, options ) {
+    initialize: function( that, options ) {
 
       // Create the global this element
       methods.el = that;
@@ -32,7 +34,6 @@
       * during intialization of the plugin.
       *
       * For an example, see javascripts/demo.js
-      *
       */
       methods.settings = $.extend( {
         width            : '100%',
@@ -44,7 +45,7 @@
         defaultFont      : 'Helvetica Neue, Helvetica, arial, sans-serief',
         defaultFontSize  : '1em',
         defaultFontColor : '#000000',
-        defaultActions   : 'bold, underline, italic, strikethrough, align-left, align-center, align-right, unordered-list, ordered-list, link, image',
+        defaultActions   : ['bold', 'underline', 'italic', 'strikethrough', 'align-left', 'align-center', 'align-right', 'unordered-list', 'ordered-list', 'link', 'image'],
 
         // Callbacks
         isContentChanged : noop,
@@ -75,21 +76,23 @@
     // Set new content in the editor
     setContentToEditor: function( content ) {
       $( methods.editor ).contents().find('body').append( content );
+      return content;
     },
 
     // Set new content in the textarea
     setContentToTextarea: function( content ) {
       $( methods.el ).val( content );
+      return content;
     },
 
     // Get content from the textarea
     getContentFromTextarea: function() {
-      return $( methods.el ).text();
+      return $( methods.el ).val();
     },
 
     // Get content from the editor
     getContentFromEditor: function() {
-      return $(methods.editor).contents().find('body').html();
+      return $( methods.editor ).contents().find('body').html();
     },
 
     /**
@@ -102,7 +105,7 @@
     render: function() {
 
       // Hide the current text field
-      $(methods.el).hide();
+      $( methods.el ).hide();
 
       // Create a container which will hold or text editor
       methods.container = $('<div />').addClass( methods.settings.containerClass ).css({
@@ -112,7 +115,7 @@
       });
 
       // Add the container after the element where we bind this plugin too
-      $(methods.el).after( methods.container );
+      $( methods.el ).after( methods.container );
 
       // Create the iFrame and append to the previously created container
       methods.editor = $('<iframe />').addClass( methods.settings.iFrameClass ).css({
@@ -129,7 +132,7 @@
       methods.editor.contentWindow.document.designMode='on';
 
       // Set the standard fonts etc
-      $(methods.editor).contents().find('body').css({
+      $( methods.editor ).contents().find('body').css({
         'word-wrap'     : 'break-word',
         'font-family'   : methods.settings.defaultFont,
         'font-size'     : methods.settings.defaultFontSize,
@@ -137,11 +140,11 @@
       });
 
       // Add a p tag to make sure browsers don't add div's
-      $(methods.editor).contents().find('body').append('<p> </p>');
+      $( methods.editor ).contents().find('body').append('<p></p>');
 
       // Add some css to the iFrame
       var iFrameCSS = '<style type="text/css">body{padding:2%;}p{margin:0;}</style>';
-      $(methods.editor).contents().find('head').append(iFrameCSS);
+      $( methods.editor ).contents().find('head').append(iFrameCSS);
 
       // Build the button container
       methods.buttons = $('<div />').addClass( methods.settings.buttonsClass ).css({
@@ -164,17 +167,14 @@
     */
     createButtons: function() {
 
-      // Define the 'to make buttons'
-      var defaultOptions = methods.settings.defaultActions.split(/, ?/);
-
       // Loop through all the buttons
-      for( i = 0; i < defaultOptions.length; i++ ) {
+      for( var i = 0; i < methods.settings.defaultActions.length; i++ ) {
 
         // Create a variable to store the object in
         var button;
 
         // Get the right value
-        switch( defaultOptions[i] ) {
+        switch( methods.settings.defaultActions[i] ) {
           case 'bold' :
             button = { content : 'b', command : 'bold' };
           break;
@@ -347,9 +347,11 @@
       // Check command for special actions and run it
       if( cmd === 'image' ) {
 
+        var image;
+
         // Check for the insertImage function, this will always be true
         if( typeof methods.settings.setImage === 'function' ) {
-          var image = methods.settings.setImage.call();
+          image = methods.settings.setImage.call();
         }
 
         // Check or a other plugin or CMS added an image to the plugin
@@ -394,12 +396,11 @@
       if ( methods[method] ) {
         return methods[method].apply( this, Array.prototype.slice.call( arguments, 1 ) );
       } else if ( typeof method === 'object' || ! method ) {
-        return methods.init( this, method );
+        return methods.initialize( this, method );
       } else {
         $.error( 'Method ' +  method + ' does not exist on jQuery.texteditor' );
       }
     });
 
   };
-
 })( jQuery );
