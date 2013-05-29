@@ -384,6 +384,12 @@
 
       // Remove classes from ol tag 
       $(methods.editor).contents().find('body').find('ol').removeAttr('class').unwrap();
+
+      // Remove all div tags
+			$(methods.editor).contents().find('div').each( function( index ) {
+				console.log( this );
+				console.log( index );
+			});
     }
   };
 

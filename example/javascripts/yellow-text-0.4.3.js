@@ -139,9 +139,6 @@
         'color'         : methods.settings.defaultFontColor
       });
 
-      // Add a p tag to make sure browsers don't add div's
-      $( methods.editor ).contents().find('body').append('<p></p>');
-
       // Add some css to the iFrame
       var iFrameCSS = '<style type="text/css">body{padding:2%;}p{margin:0;}</style>';
       $( methods.editor ).contents().find('head').append(iFrameCSS);
@@ -269,6 +266,7 @@
 
         // Put the content back in the textfield
         methods.setContentToTextarea( methods.getContentFromEditor() );
+        return false;
       });
     },
 
@@ -376,14 +374,25 @@
     */
     cleanTheCode: function() {
 
+      // Remove all div tags and replace with br tags
+      $(methods.editor).contents().find('div').each( function() {
+        $(this).replaceWith('<p>' + $(this).html()  + '</p>');
+      });
+
       // Remove classes from br tag
-      $(methods.editor).contents().find('body').find('br').removeAttr('class').unwrap();
+      $(methods.editor).contents().find('body').find('br').each( function() {
+        $(this).removeAttr('class').unwrap();
+      });
 
       // Remove classes from ul tag
-      $(methods.editor).contents().find('body').find('ul').removeAttr('class').unwrap();
+      $(methods.editor).contents().find('body').find('ul').each( function() {
+        $(this).removeAttr('class').unwrap();
+      });
 
       // Remove classes from ol tag 
-      $(methods.editor).contents().find('body').find('ol').removeAttr('class').unwrap();
+      $(methods.editor).contents().find('body').find('ol').each( function() {
+        $(this).removeAttr('class').unwrap();
+      });
     }
   };
 
