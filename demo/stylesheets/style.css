@@ -1,11 +1,3 @@
-/**
-*
-*	Demo Yellow Text
-*	====================================
-*	Author: Stefan Vermaas
-*	URL: www.stefanvermaas.nl
-*	Version: 0.1
-*/
 /**	
 *
 *	Demo basics
@@ -97,4 +89,25 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 .editor-sub-title {
   font: 1em/1.33 Georgia;
   margin-bottom: .5em;
+}
+
+.btn {
+  display: block;
+  float: right;
+  margin-top: 15px;
+  padding: 5px 10px;
+
+  border-radius: 2px;
+  border: 1px solid rgba(0, 0, 0, 0.25);  
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #e8e8e8), color-stop(100%, #d2d1d1));
+  background-image: -webkit-linear-gradient(#e8e8e8, #d2d1d1);
+  background-image: -moz-linear-gradient(#e8e8e8, #d2d1d1);
+  background-image: -o-linear-gradient(#e8e8e8, #d2d1d1);
+  background-image: linear-gradient(#e8e8e8, #d2d1d1);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+
+  font: 16px Georgia;
+  text-align: center;
+  text-shadow: 0 1px #fff;
+  cursor: pointer;
 }

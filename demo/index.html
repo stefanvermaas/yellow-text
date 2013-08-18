@@ -11,8 +11,8 @@
     <title>Yellow Text</title>
 
 	<!-- Stylesheets -->
-	<link rel="stylesheet" type="text/css" href="stylesheets/style.css" />	<!-- include your own javascript -->
-	<link rel="stylesheet" type="text/css" href="stylesheets/jquery.texteditor.css" /> <!-- include the needed css for the texteditor -->
+	<link rel="stylesheet" type="text/css" href="./stylesheets/style.css" />	<!-- include your own javascript -->
+	<link rel="stylesheet" type="text/css" href="./stylesheets/jquery.texteditor.css" /> <!-- include the needed css for the texteditor -->
 	<!-- Stylesheets -->
 
 	<!-- CDN jQuery -->
@@ -31,15 +31,22 @@
 			
 			<textarea id="js-textarea"></textarea><!-- #js-textarea -->
 			
-			<input type="submit" name="submit" value="save form">
+			<input type="submit" name="submit" value="Save form" class="btn">
 			
 		</form>
 
 	</div><!-- .wrapper -->
 	
 	<!-- jQuery files -->
-	<script type="text/javascript" src="javascripts/yellow-text-0.4.3.js"></script> <!-- include the texteditor script -->	
-	<script type="text/javascript" src="javascripts/demo.js"></script> <!-- include the texteditor settings -->
+	<script type="text/javascript" src="./../dist/yellow-text.min.js"></script> <!-- include the texteditor script -->
+
+	<script type="text/javascript">
+	$(function() {
+	  $('#js-textarea').YellowText({
+	    defaultFont: 'Georgia'
+	  });
+	});
+	</script>
 
 </body>
 </html>

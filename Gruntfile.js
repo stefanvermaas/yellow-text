@@ -1,32 +1,77 @@
-module.exports = function( grunt ) {
+module.exports = function(grunt) {
 
-  // Project configuration.
-  grunt.initConfig({
-    pkg: grunt.file.readJSON('package.json'),
+	grunt.initConfig({
 
-    // Define Jasmine task options.
-    jasmine: {
-      src: 'yellow-text.js',
-      options: {
-        vendor: 'http://cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js',
-        outfile: 'specs.html',
-        specs: 'test/yellow-text-<%= pkg.version %>.spec.js'
-      }
-    },
+		// Import package manifest
+		pkg: grunt.file.readJSON("yellow-text.jquery.json"),
 
-    // Define Watch task options.
-    watch: {
-      scripts: {
-        files: ['yellow-text.js', 'test/yellow-text-<%= pkg.version %>.spec.js'],
-        tasks: 'default'
-      }
-    }
-  });
+		// Banner definitions
+		meta: {
+			banner: "/*\n" +
+				" *  <%= pkg.title || pkg.name %> - v<%= pkg.version %>\n" +
+				" *  <%= pkg.description %>\n" +
+				" *  <%= pkg.homepage %>\n" +
+				" *\n" +
+				" *  Made by <%= pkg.author.name %>\n" +
+				" *  Under <%= pkg.licenses[0].type %> License\n" +
+				" */\n"
+		},
 
-  // Load the plugin that provides the "uglify" task.
-  grunt.loadNpmTasks('grunt-contrib-jasmine');
-  grunt.loadNpmTasks('grunt-contrib-watch');
+		// Concat definitions
+		concat: {
+			dist: {
+				src: ["src/yellow-text.js"],
+				dest: "dist/yellow-text.js"
+			},
+			options: {
+				banner: "<%= meta.banner %>"
+			}
+		},
 
-  // Default task(s).
-  grunt.registerTask('default', [ 'jasmine' ]);
+		// Lint definitions
+		jshint: {
+			files: ["src/yellow-text.js"],
+			options: {
+				jshintrc: ".jshintrc"
+			}
+		},
+
+		// Minify definitions
+		uglify: {
+			my_target: {
+				src: ["dist/yellow-text.js"],
+				dest: "dist/yellow-text.min.js"
+			},
+			options: {
+				banner: "<%= meta.banner %>"
+			}
+		},
+
+		// CoffeeScript compilation
+		coffee: {
+			compile: {
+				files: {
+					"dist/yellow-text.js": "src/yellow-text.coffee"
+				}
+			}
+		},
+
+		// Watch the project folder and start the tasks
+		watch: {
+			files: ["src/*.js"],
+			tasks: ["default"]
+		}
+
+	});
+
+	grunt.loadNpmTasks("grunt-contrib-watch");
+	grunt.loadNpmTasks("grunt-contrib-concat");
+	grunt.loadNpmTasks("grunt-contrib-jshint");
+	grunt.loadNpmTasks("grunt-contrib-uglify");
+	grunt.loadNpmTasks("grunt-contrib-coffee");
+
+	grunt.registerTask("default", ["jshint", "concat", "uglify"]);
+	grunt.registerTask("coffee", ["jshint", "concat", "uglify", "coffee"]);
+	grunt.registerTask("travis", ["jshint"]);
+
 };

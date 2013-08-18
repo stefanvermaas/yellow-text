@@ -37,11 +37,6 @@ Icon?
 ehthumbs.db
 Thumbs.db
 
-# SASS files #
-##############
-.sass-cache/
-sass/
-
 # Grunt and NodeJS files #
 ##########################
 node_modules/
