@@ -385,11 +385,7 @@
 		      $(this.editor).contents().find("body").find("ol").removeAttr("class").unwrap();
 
 		      // Remove all div tags
-					$(this.editor).contents().find("div").each( function() {
-
-						// Wrap the element in a <p> tag
-						$( this ).wrap("<p />").contents().unwrap();
-					});
+					$(this.editor).contents().find("div").wrap("<p />").contents().unwrap();
 		    }
 		};
 
