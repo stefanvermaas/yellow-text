@@ -11,6 +11,9 @@
 */
 ;(function ( $, window, document, undefined ) {
 
+		// Create an empty noop function as a placeholder
+		function noob() {}
+
 		// Create the defaults once
 		var pluginName = "YellowText",
 				defaults = {
@@ -23,7 +26,10 @@
 	        defaultFont      : "Helvetica Neue, Helvetica, arial, sans-serief",
 	        defaultFontSize  : "1em",
 	        defaultFontColor : "#000000",
-	        defaultActions   : ["bold", "underline", "italic", "strikethrough", "align-left", "align-center", "align-right", "unordered-list", "ordered-list", "link", "image"]
+	        defaultActions   : ["bold", "underline", "italic", "strikethrough", "align-left", "align-center", "align-right", "unordered-list", "ordered-list", "link", "image"],
+
+	        // Define the callback options
+	        isContentChanged: noob
 		};
 
 		// The actual plugin constructor
@@ -126,9 +132,6 @@
 		        "color"         : this.options.defaultFontColor
 		      });
 
-		      // Add a p tag to make sure browsers don"t add div"s
-		      $( this.editor ).contents().find("body").append("<p></p>");
-
 		      // Add some css to the iFrame
 		      var iFrameCSS = "<style type=\"text/css\">body{padding:2%;}p{margin:0;}</style>";
 		      $( this.editor ).contents().find("head").append(iFrameCSS);
@@ -221,12 +224,14 @@
 		    */
 		    events: function() {
 
+					var that = this;
+
 		      // Bind to the click event on the buttons
 		      $("." + this.options.buttonsClass + " a").on("click", function( e ) {
 
 		        // Grap the command and react on event
 		        var command = $(this).data("command");
-		        this.buttonClicked( e, command );
+		        that.buttonClicked( e, command );
 		      });
 
 		      // Bind to the keydown event while typing
@@ -234,7 +239,7 @@
 
 		        // Look for the control or command key
 		        if( e.ctrlKey || e.metaKey ) {
-		          this.shortkey( e, this );
+		          that.shortkey( e, this );
 		        }
 		      });
 
@@ -242,20 +247,20 @@
 		      $( this.editor ).contents().find("body").on("keyup", function() {
 
 		        // Check or the text is changed
-		        var changed = ( $( this.editor ).contents().find("body").html() !== $(this.element).text() ) ? true : false;
+		        var changed = ( $( that.editor ).contents().find("body").html() !== $( that.element).text() ) ? true : false;
 
 		        // Call the callback
-		        this.options.isContentChanged( changed );
+		        that.options.isContentChanged( changed );
 		      });
 
 		      // Bind to the submit event of the form
 		      $( this.element ).parents("form").on("submit", function() {
 
 		        // First clean the code
-		        this.cleanTheCode();
+		        that.cleanTheCode();
 
 		        // Put the content back in the textfield
-		        this.setContentToTextarea( this.getContentFromEditor() );
+		        that.setContentToTextarea( that.getContentFromEditor() );
 		      });
 		    },
 
@@ -372,9 +377,10 @@
 		      $(this.editor).contents().find("body").find("ol").removeAttr("class").unwrap();
 
 		      // Remove all div tags
-					$(this.editor).contents().find("div").each( function( index ) {
-						console.log( this );
-						console.log( index );
+					$(this.editor).contents().find("div").each( function() {
+
+						// Wrap the element in a <p> tag
+						$( this ).wrap("<p />").contents().unwrap();
 					});
 		    }
 		};
