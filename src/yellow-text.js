@@ -4,7 +4,7 @@
 * This plugin is created to make text editing
 * more fun and to make it easy for the editor.
 *
-* Version: 0.4.3
+* Version: 0.4.5
 * Author: Stefan Vermaas
 * URL: www.stefanvermaas.nl
 *
@@ -34,351 +34,311 @@
 
     // The actual plugin constructor
     function YellowText ( element, options ) {
-        // Define the default element
-        this.element = element;
-        this.options = $.extend( {}, defaults, options );
-        this._defaults = defaults;
-        this._name = pluginName;
-        this.init();
+
+      // Define some default plugin options
+      this.element = element;
+      this.options = $.extend( {}, defaults, options );
+      this._defaults = defaults;
+      this._name = pluginName;
+
+      // Initialize the whole plugin
+      this.initialize();
     }
 
+    /**
+    * Extend the plugin prototype
+    */
     YellowText.prototype = {
-        // Initialize the whole plugin
-        init: function () {
 
-          // Render the plugin
-          this.render();
+      /**
+      * Initializing the plugin
+      */
+      initialize: function () {
 
-          // Grap the content and put it in the iframe
-          this.setContentToEditor( this.getContentFromTextarea() );
+        // Render the plugin
+        this.render();
 
-          // Listen to events and react on them
-          this.events();
-        },
-        /**
-        *
-        * Content
-        * =========================================
-        * There"re two functions that are used to get
-        * and set the content of the text editor.
-        *
-        * The setContent function needs content. Usually
-        * this will come from the getContent() function.
-        */
+        // Grap the content and put it in the iframe
+        this.setContentToEditor( this.getContentFromTextarea() );
 
-        // Set new content in the editor
-        setContentToEditor: function( content ) {
-          $( this.editor ).contents().find("body").append( content );
-          return content;
-        },
+        // Listen to events and react on them
+        this.events();
+      },
 
-        // Set new content in the textarea
-        setContentToTextarea: function( content ) {
-          $( this.element ).val( content );
-          return content;
-        },
+      /**
+      * Getting and setting content
+      */
 
-        // Get content from the textarea
-        getContentFromTextarea: function() {
-          return $( this.element ).val();
-        },
+      // Set new content in the editor
+      setContentToEditor: function( content ) {
+        $( this.editor ).contents().find("body").append( content );
+        return content;
+      },
 
-        // Get content from the editor
-        getContentFromEditor: function() {
-          return $( this.editor ).contents().find("body").html();
-        },
+      // Set new content in the textarea
+      setContentToTextarea: function( content ) {
+        $( this.element ).val( content );
+        return content;
+      },
 
-        /**
-        *
-        * Render
-        * =========================================
-        * This function renders the whole plugin and
-        * it"s only used to build the plugin.
-        */
-        render: function() {
+      // Get content from the textarea
+      getContentFromTextarea: function() {
+        return $( this.element ).val();
+      },
 
-          // Hide the current text field
-          $( this.element ).hide();
+      // Get content from the editor
+      getContentFromEditor: function() {
+        return $( this.editor ).contents().find("body").html();
+      },
 
-          // Create a container which will hold or text editor
-          this.container = $("<div />").addClass( this.options.containerClass ).css({
-            "float"   : "left",
-            "width"   : this.options.width,
-            "border"  : "1px solid #ccc"
-          });
+      /**
+      * Render the plugin 
+      */
+      render: function() {
 
-          // Add the container after the element where we bind this plugin too
-          $( this.element ).after( this.container );
+        // Hide the current text field
+        $( this.element ).hide();
 
-          // Create the iFrame and append to the previously created container
-          this.editor = $("<iframe />").addClass( this.options.iFrameClass ).css({
-            "float"   : "left",
-            "width"   : this.options.width,
-            "height"  : this.options.height,
-            "border"  : 0,
-            "overflow": "hidden"
-          }).appendTo( this.container ).get(0);
+        // Create a container which will hold or text editor
+        this.container = $("<div />").addClass( this.options.containerClass ).css({
+          "float"   : "left",
+          "width"   : this.options.width,
+          "border"  : "1px solid #ccc"
+        });
 
-          // Make the editor work in all browsers
-          this.editor.contentWindow.document.open();
-          this.editor.contentWindow.document.close();
-          this.editor.contentWindow.document.designMode = "on";
+        // Add the container after the element where we bind this plugin too
+        $( this.element ).after( this.container );
 
-          // Set the standard fonts etc
-          $( this.editor ).contents().find("body").css({
-            "word-wrap"     : "break-word",
-            "font-family"   : this.options.defaultFont,
-            "font-size"     : this.options.defaultFontSize,
-            "color"         : this.options.defaultFontColor
-          });
+        // Create the iFrame and append to the previously created container
+        this.editor = $("<iframe />").addClass( this.options.iFrameClass ).css({
+          "float"   : "left",
+          "width"   : this.options.width,
+          "height"  : this.options.height,
+          "border"  : 0,
+          "overflow": "hidden"
+        }).appendTo( this.container ).get(0);
 
-          // Add some css to the iFrame
-          var iFrameCSS = "<style type=\"text/css\">body{padding:2%;}p{margin:0;}</style>";
-          $( this.editor ).contents().find("head").append(iFrameCSS);
+        // Make the editor work in all browsers
+        this.editor.contentWindow.document.open();
+        this.editor.contentWindow.document.close();
+        this.editor.contentWindow.document.designMode = "on";
 
-          // Build the button container
-          this.buttons = $("<div />").addClass( this.options.buttonsClass ).css({
-            "float"   : "left",
-            "width"   : this.options.width
-          }).prependTo( this.container );
+        // Set the standard fonts etc
+        $( this.editor ).contents().find("body").css({
+          "word-wrap"     : "break-word",
+          "font-family"   : this.options.defaultFont,
+          "font-size"     : this.options.defaultFontSize,
+          "color"         : this.options.defaultFontColor
+        });
 
-          // Render the buttons
-          this.createButtons();
-        },
+        // Add some css to the iFrame
+        var iFrameCSS = "<style type=\"text/css\">body{padding:2%;}p{margin:0;}</style>";
+        $( this.editor ).contents().find("head").append(iFrameCSS);
 
-        /**
-        *
-        * createButtons
-        * =========================================
-        * This part of the plugin build all the buttons
-        * that are defined by the user or it takes the
-        * default buttons.
-        *
-        */
-        createButtons: function() {
+        // Build the button container
+        this.buttons = $("<div />").addClass( this.options.buttonsClass ).css({
+          "float"   : "left",
+          "width"   : this.options.width
+        }).prependTo( this.container );
 
-          // Loop through all the buttons
-          for( var i = 0; i < this.options.defaultActions.length; i++ ) {
+        // Render the buttons
+        this.createButtons();
+      },
 
-            // Create a variable to store the object in
-            var button;
+      createButtons: function() {
 
-            // Get the right value
-            switch( this.options.defaultActions[i] ) {
-              case "bold" :
-                button = { content : "b", command : "bold" };
-              break;
-              case "underline" :
-                button = { content : "u", command : "underline" };
-              break;
-              case "italic" :
-                button = { content : "i", command : "italic" };
-              break;
-              case "strikethrough" :
-                button = { content : "s", command : "strikethrough" };
-              break;
-              case "align-left" :
-                button = { content : "left", command : "JustifyLeft" };
-              break;
-              case "align-center" :
-                button = { content : "center", command : "JustifyCenter" };
-              break;
-              case "align-right" :
-                button = { content : "right", command : "JustifyRight" };
-              break;
-              case "unordered-list" :
-                button = { content : "ul", command : "InsertUnorderedList" };
-              break;
-              case "ordered-list" :
-                button = { content : "ol", command : "InsertOrderedList" };
-              break;
-              case "image" :
-                button = { content : "img", command : "image" };
-              break;
-              case "link" :
-                button = { content : "link", command : "link" };
-              break;
-              default :
-                button = { content : "", command : "" };
-            }
+        // Loop through all the buttons
+        for( var i = 0; i < this.options.defaultActions.length; i++ ) {
 
-            // Build the buttons and add before the container
-            $("<a />").addClass( button.command ).text( button.content ).data( "command", button.command ).appendTo( this.buttons );
+          // Create a variable to store the object in
+          var button;
+
+          // Get the right value
+          switch( this.options.defaultActions[i] ) {
+            case "bold" :
+              button = { content : "b", command : "bold" };
+            break;
+            case "underline" :
+              button = { content : "u", command : "underline" };
+            break;
+            case "italic" :
+              button = { content : "i", command : "italic" };
+            break;
+            case "strikethrough" :
+              button = { content : "s", command : "strikethrough" };
+            break;
+            case "align-left" :
+              button = { content : "left", command : "JustifyLeft" };
+            break;
+            case "align-center" :
+              button = { content : "center", command : "JustifyCenter" };
+            break;
+            case "align-right" :
+              button = { content : "right", command : "JustifyRight" };
+            break;
+            case "unordered-list" :
+              button = { content : "ul", command : "InsertUnorderedList" };
+            break;
+            case "ordered-list" :
+              button = { content : "ol", command : "InsertOrderedList" };
+            break;
+            case "image" :
+              button = { content : "img", command : "image" };
+            break;
+            case "link" :
+              button = { content : "link", command : "link" };
+            break;
+            default :
+              button = { content : "", command : "" };
           }
-        },
 
-        /**
-        *
-        * Events
-        * =========================================
-        * Listen to specific events. The events that
-        * are justed in this plugin are click, keydown
-        * and submit event
-        *
-        * With the click event we can detect a click on
-        * a button to modify the text.
-        *
-        * With the keydown event we can detect or the
-        * user uses shortkeys for editing text.
-        *
-        */
-        events: function() {
+          // Build the buttons and add before the container
+          $("<a />").addClass( button.command ).text( button.content ).data( "command", button.command ).appendTo( this.buttons );
+        }
+      },
 
-          var that = this;
+      /**
+      * Listen to events
+      */
+      events: function() {
 
-          // Bind to the click event on the buttons
-          $("." + this.options.buttonsClass + " a").on("click", function( e ) {
+        var that = this;
 
-            // Grap the command and react on event
-            var command = $(this).data("command");
-            that.buttonClicked( e, command );
-          });
+        // Bind to the click event on the buttons
+        $("." + this.options.buttonsClass + " a").on("click", function( e ) {
 
-          // Bind to the keydown event while typing
-          $( this.editor ).contents().find("body").on("keydown", function( e ) {
+          // Grap the command and react on event
+          var command = $(this).data("command");
+          that.buttonClicked( e, command );
+        });
 
-            // Look for the control or command key
-            if( e.ctrlKey || e.metaKey ) {
-              that.shortkey( e, this );
-            }
-          });
+        // Bind to the keydown event while typing
+        $( this.editor ).contents().find("body").on("keydown", function( e ) {
 
-          // Bind the keyup event, to check for changes
-          $( this.editor ).contents().find("body").on("keyup", function() {
+          // Look for the control or command key
+          if( e.ctrlKey || e.metaKey ) {
+            that.shortkey( e, this );
+          }
+        });
 
-            // Check or the text is changed
-            var changed = ( $( that.editor ).contents().find("body").html() !== $( that.element).text() ) ? true : false;
+        // Bind the keyup event, to check for changes
+        $( this.editor ).contents().find("body").on("keyup", function() {
 
-            // Call the callback
-            that.options.isContentChanged( changed );
-          });
+          // Check or the text is changed
+          var changed = ( $( that.editor ).contents().find("body").html() !== $( that.element).text() ) ? true : false;
 
-          // Bind to the submit event of the form
-          $( this.element ).parents("form").on("submit", function() {
+          // Call the callback
+          that.options.isContentChanged( changed );
+        });
 
-            // First clean the code
-            that.cleanTheCode();
+        // Bind to the submit event of the form
+        $( this.element ).parents("form").on("submit", function() {
 
-            // Put the content back in the textfield
-            that.setContentToTextarea( that.getContentFromEditor() );
-          });
-        },
+          // First clean the code
+          that.cleanTheCode();
 
-        /**
-        *
-        * buttonClicked
-        * =========================================
-        * This function reacts on the fact that a
-        * button is clicked. Based on the button an
-        * action will be triggered
-        */
-        buttonClicked: function( e, command ) {
+          // Put the content back in the textfield
+          that.setContentToTextarea( that.getContentFromEditor() );
+        });
+      },
 
-          // Focus on the contentWindow
+      /**
+      *
+      * buttonClicked
+      * =========================================
+      * This function reacts on the fact that a
+      * button is clicked. Based on the button an
+      * action will be triggered
+      */
+      buttonClicked: function( e, command ) {
+
+        // Focus on the contentWindow
+        this.editor.contentWindow.focus();
+
+        // Take an other look at the command and look for the perfect action and execute it
+        this.runCMD( command );
+
+        // And focus back again on the contentWindow
+        this.editor.contentWindow.focus();
+      },
+
+      /**
+      * Use some short keys
+      */
+      shortkey: function( e ) {
+
+        // Define the key
+        var key = e.which;
+
+        // Check or we have on of the right keys
+        if( key === 66 || key === 73 || key === 85 ) {
+
+          // Focus on the content window
           this.editor.contentWindow.focus();
 
-          // Take an other look at the command and look for the perfect action and execute it
-          this.runCMD( command );
+          // Handle the action
+          switch( key ) {
+            case 66:
+              this.runCMD("bold");
+            break;
+            case 73:
+              this.runCMD("italic");
+            break;
+            case 85:
+              this.runCMD("underline");
+            break;
+          }
 
           // And focus back again on the contentWindow
           this.editor.contentWindow.focus();
-        },
-
-        /**
-        *
-        * shortkey
-        * =========================================
-        * Wanna use a shortkey? This function takes
-        * care for that. You can quickly edit the text
-        * by using those shortkeys.
-        *
-        * Currently you can use cmd/ctrl + b, cmd/ctrl + i
-        * and cmd/ctrl + u to make your text bold, italic
-        * or underlined.
-        */
-        shortkey: function( e ) {
-
-          // Define the key
-          var key = e.which;
-
-          // Check or we have on of the right keys
-          if( key === 66 || key === 73 || key === 85 ) {
-
-            // Focus on the content window
-            this.editor.contentWindow.focus();
-
-            // Handle the action
-            switch( key ) {
-              case 66:
-                this.runCMD("bold");
-              break;
-              case 73:
-                this.runCMD("italic");
-              break;
-              case 85:
-                this.runCMD("underline");
-              break;
-            }
-
-            // And focus back again on the contentWindow
-            this.editor.contentWindow.focus();
-          }
-        },
-
-        /**
-        *
-        * runCMD
-        * =========================================
-        * This is the real deal. This part of the
-        * script handles the actual commands and it
-        * can be used by every other function as long
-        * as it provides a command to execute.
-        */
-        runCMD: function( cmd ) {
-
-          // Check command for special actions and run it
-          if( cmd === "image" ) {
-
-            var image;
-
-            // Check for the insertImage function, this will always be true
-            if( typeof this.options.setImage === "function" ) {
-              image = this.options.setImage.call();
-            }
-
-            // Check or a other plugin or CMS added an image to the plugin
-            var url = ( typeof image !== "undefined" && image.length > 0 ) ? image : prompt("URL (example: http://www.google.com): ");
-
-            // Insert the image in the text editor
-            return this.editor.contentWindow.document.execCommand( "InsertImage", false, url);
-          } else if( cmd === "link" ) {
-            var link = prompt("URL (example: http://www.google.com): ");
-            return this.editor.contentWindow.document.execCommand( "CreateLink", false, link);
-          } else {
-            return this.editor.contentWindow.document.execCommand( cmd );
-          }
-        },
-
-        /**
-        *
-        * cleanTheCode
-        * =========================================
-        * Remove ugly stuff that browsers insert
-        */
-        cleanTheCode: function() {
-
-          // Remove classes from br tag
-          $(this.editor).contents().find("body").find("br").removeAttr("class").unwrap();
-
-          // Remove classes from ul tag
-          $(this.editor).contents().find("body").find("ul").removeAttr("class").unwrap();
-
-          // Remove classes from ol tag 
-          $(this.editor).contents().find("body").find("ol").removeAttr("class").unwrap();
-
-          // Remove all div tags
-          $(this.editor).contents().find("div").wrap("<p />").contents().unwrap();
         }
+      },
+
+      /**
+      * Run the actual command
+      */
+      runCMD: function( cmd ) {
+
+        // Check command for special actions and run it
+        if( cmd === "image" ) {
+
+          var image;
+
+          // Check for the insertImage function, this will always be true
+          if( typeof this.options.setImage === "function" ) {
+            image = this.options.setImage.call();
+          }
+
+          // Check or a other plugin or CMS added an image to the plugin
+          var url = ( typeof image !== "undefined" && image.length > 0 ) ? image : prompt("URL (example: http://www.google.com): ");
+
+          // Insert the image in the text editor
+          return this.editor.contentWindow.document.execCommand( "InsertImage", false, url);
+        } else if( cmd === "link" ) {
+          var link = prompt("URL (example: http://www.google.com): ");
+          return this.editor.contentWindow.document.execCommand( "CreateLink", false, link);
+        } else {
+          return this.editor.contentWindow.document.execCommand( cmd );
+        }
+      },
+
+      /**
+      * Clean the mess of the browsers
+      */
+      cleanTheCode: function() {
+
+        // Remove classes from br tag
+        $(this.editor).contents().find("body").find("br").removeAttr("class").unwrap();
+
+        // Remove classes from ul tag
+        $(this.editor).contents().find("body").find("ul").removeAttr("class").unwrap();
+
+        // Remove classes from ol tag 
+        $(this.editor).contents().find("body").find("ol").removeAttr("class").unwrap();
+
+        // Remove all div tags
+        $(this.editor).contents().find("div").wrap("<p />").contents().unwrap();
+      }
     };
 
     // A really lightweight plugin wrapper around the constructor,
