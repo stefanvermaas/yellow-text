@@ -1,0 +1,113 @@
+/**
+*
+*	Yellow Text 
+*	========================================
+*	This is a pre-made theme for the Yellow
+*	text editor and it's not needed to run
+*	the plugin. 
+*
+*/
+.js-editor-container {
+  margin-top: 0.5em;
+  border: 1px solid #2e5c81 !important;
+  border-radius: 3px;
+}
+
+/**
+*
+*	Buttons
+*	========================================
+*	This section styles the buttons and the 
+*	button bar, that holds all the buttons.
+*
+*/
+.js-editor-buttons {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+  background-color: #356994;
+  box-shadow: 0 1px 5px #2e5c81,
+              inset 0 1px rgba(250, 250, 250, 0.25);
+}
+
+.js-editor-buttons > a {
+  display: block;
+  float: left;
+  width: 18px;
+  height: 18px;
+  margin: 7px;
+  font: 18px Georgia;
+  color: white;
+  text-align: center;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.underline {
+  text-decoration: underline;
+}
+
+.italic {
+  font-style: italic;
+}
+
+.strikethrough {
+  text-decoration: line-through;
+}
+
+.icon-sprite, .JustifyLeft, .JustifyCenter, .JustifyRight, .InsertUnorderedList, .InsertOrderedList, .image, .link {
+  background: url('../images/icon-s634930a1a1.png') no-repeat;
+}
+
+.JustifyLeft,
+.JustifyCenter,
+.JustifyRight,
+.InsertUnorderedList,
+.InsertOrderedList,
+.image,
+.link {
+  margin-top: 9px;
+  text-indent: -99999em;
+}
+
+.JustifyLeft {
+  background-position: 0 -276px;
+}
+
+.JustifyCenter {
+  background-position: 0 -184px;
+}
+
+.JustifyRight {
+  background-position: 0 -230px;
+}
+
+.InsertUnorderedList {
+  background-position: 0 -138px;
+}
+
+.InsertOrderedList {
+  background-position: 0 -46px;
+}
+
+.image {
+  background-position: 0 -92px;
+}
+
+.link {
+  background-position: 0 0;
+}
+
+.js-editor-buttons a:first-child { margin-left: 35px; }
+
+.js-editor-buttons a:nth-child(4),
+.js-editor-buttons a:nth-child(7),
+.js-editor-buttons a:nth-child(9) {
+  margin-right: 35px;
+}
+
+.js-editor-iframe {
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.25);
+}
