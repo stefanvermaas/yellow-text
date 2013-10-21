@@ -10,6 +10,6 @@
 	"quotmark": "double",
 	"smarttabs": true,
 	"trailing": true,
-	"unused": true,
+	"unused": false,
 	"node": true
 }
