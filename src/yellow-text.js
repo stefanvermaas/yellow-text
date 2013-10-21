@@ -1,9 +1,5 @@
 (function() {
   (function($, window, document) {
-    /*
-    Create the default instances
-    */
-
     var Plugin, defaults, pluginName;
     pluginName = "yellowtext";
     defaults = {
@@ -19,10 +15,6 @@
       iframe: "js-editor-iframe",
       actions: ["bold", "underline", "italic", "strikethrough", "align-left", "align-center", "align-right", "unordered-list", "ordered-list", "link"]
     };
-    /*
-    Create the actual plugin
-    */
-
     Plugin = (function() {
       function Plugin(element, options) {
         this.element = element;

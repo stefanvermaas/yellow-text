@@ -1,8 +1,6 @@
 do ($ = jQuery, window, document) ->
 
-  ###
-  Create the default instances
-  ###
+  # Create the default instances
   pluginName = "yellowtext"
   defaults =
 
@@ -25,9 +23,7 @@ do ($ = jQuery, window, document) ->
     # Editor actions
     actions: ["bold", "underline", "italic", "strikethrough", "align-left", "align-center", "align-right", "unordered-list", "ordered-list", "link"]
 
-  ###
-  Create the actual plugin
-  ###
+  # Create the actual plugin
   class Plugin
     constructor: (@element, options) ->
 

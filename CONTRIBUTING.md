@@ -1,7 +1,5 @@
 # Contributing
 
-Before sending a pull request remember to follow [Airbnb's Javascript Style Guide](https://github.com/airbnb/javascript).
-
 1. Fork it!
 2. Create your feature branch: `git checkout -b my-new-feature`
 3. Make your changes on the `src` folder, never on the `dist` folder.
