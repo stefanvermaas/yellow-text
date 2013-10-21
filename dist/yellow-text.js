@@ -30,7 +30,6 @@
         this._defaults = defaults;
         this._name = pluginName;
         this.render();
-        this.setContentToEditor(this.getContentFromTextarea);
         this.events();
       }
 

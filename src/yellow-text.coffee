@@ -36,7 +36,7 @@ do ($ = jQuery, window, document) ->
       @render()
 
       # Make sure we've got all the content
-      @setContentToEditor( @getContentFromTextarea )
+      # @setContentToEditor( @getContentFromTextarea() )
 
       # Subscribe to all the events
       @events()
