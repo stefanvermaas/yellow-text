@@ -47,19 +47,9 @@ module.exports = function(grunt) {
       }
     },
 
-    // CoffeeScript compilation
-    coffee: {
-      compile: {
-        files: {
-          "src/yellow-text.js": "src/yellow-text.coffee",
-          "spec/spec-test.js": "spec/*.coffee"
-        }
-      }
-    },
-
     // Watch the project folder and start the tasks
     watch: {
-      files: ["src/*.js", "src/*.coffee", "spec/*.coffee"],
+      files: ["src/*.js", "spec/*.js"],
       tasks: ["default"]
     },
 
@@ -68,23 +58,22 @@ module.exports = function(grunt) {
       src: ["src/*.js"],
       options: {
         specs: "spec/*.js",
-        vendor: "http://cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js",
+        vendor: "./vendor/jquery-1.10.2.min.js",
         keepRunner: true
       }
     }
 
   });
-  
+
   // Load the grunt tasks
   grunt.loadNpmTasks("grunt-contrib-watch");
   grunt.loadNpmTasks("grunt-contrib-concat");
   grunt.loadNpmTasks("grunt-contrib-jshint");
   grunt.loadNpmTasks("grunt-contrib-uglify");
-  grunt.loadNpmTasks("grunt-contrib-coffee");
   grunt.loadNpmTasks('grunt-contrib-jasmine');
 
   // Register the tasks
   grunt.registerTask("default", ["test", "compile"]);
-  grunt.registerTask("test", ["coffee", "jasmine"]);
-  grunt.registerTask("compile", ["jshint", "concat", "uglify"]);  
+  grunt.registerTask("test", ["jasmine"]);
+  grunt.registerTask("compile", ["jshint", "concat", "uglify"]);
 };

@@ -1,10 +1,10 @@
 {
   "name": "yellow-text",
   "title": "Yellow Text",
-  "description": "Yellow Text is a rich text editor, that's both simple and sophisticated.",
+  "description": "Yellow Text is a beautiful text editor which makes creating content fun again. It ships with a beautiful theme and really clever shortkeys.",
   "author": "Stefan Vermaas",
   "homepage": "https://github.com/stefanvermaas/yellow-text/",
-  "version": "0.5.0",
+  "version": "1.0.0",
   "devDependencies": {
     "grunt": "~0.4.1",
     "grunt-cli": "~0.1.7",

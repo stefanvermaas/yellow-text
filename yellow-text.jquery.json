@@ -6,7 +6,7 @@
         "YellowText",
         "texteditor"
     ],
-    "version": "0.5.0",
+    "version": "1.0.0",
     "author": {
         "name": "Stefan Vermaas",
         "url": "http://www.stefanvermaas.nl"
@@ -21,7 +21,7 @@
     "licenses": [
         {
             "type": "BEERWARE",
-            "url": "https://github.com/stefanvermaas/yellow-text"            
+            "url": "https://github.com/stefanvermaas/yellow-text"
         }
     ],
     "bugs": "https://github.com/stefanvermaas/yellow-text/issues",

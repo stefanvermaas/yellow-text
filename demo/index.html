@@ -7,7 +7,7 @@
 <head>
 	<meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    
+
     <title>Yellow Text</title>
 
 	<!-- Stylesheets -->
@@ -17,6 +17,7 @@
 
 	<!-- CDN jQuery -->
 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script> <!-- include jquery -->
+	<script>window.jQuery || document.write('<script src="../vendor/jquery-1.10.2.min.js"><\/script>')</script>
 
 </head>
 
@@ -28,15 +29,13 @@
 		<h2 class="editor-sub-title">Create an awesome editing experience</h2>
 
 		<form action="#" method="post" id="js-editor-form">
-			
+
 			<textarea id="js-textarea"></textarea><!-- #js-textarea -->
-			
-			<input type="submit" name="submit" value="Save form" class="btn">
-			
+
 		</form>
 
 	</div><!-- .wrapper -->
-	
+
 	<!-- jQuery files -->
 	<script type="text/javascript" src="./../dist/yellow-text.min.js"></script> <!-- include the texteditor script -->
 

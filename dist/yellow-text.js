@@ -1,91 +1,130 @@
 /*
- *  Yellow Text - v0.5.0
+ *  Yellow Text - v1.0.0
  *  Yellow Text is a beautiful text editor which makes creating content fun again. It ships with a beautiful theme and really clever shortkeys.
  *  https://github.com/stefanvermaas/yellow-text
  *
  *  Made by Stefan Vermaas
  *  Under BEERWARE License
  */
-(function() {
-  (function($, window, document) {
-    var Plugin, defaults, pluginName;
-    pluginName = "yellowtext";
-    defaults = {
-      width: 100,
-      widthType: "%",
-      height: 350,
-      heightType: "px",
-      font: "Helvetica Neue, Helvetica, arial, sans-serief",
-      fontSize: "1em",
-      fontColor: "#000000",
-      container: "js-editor-container",
-      buttons: "js-editor-buttons",
-      iframe: "js-editor-iframe",
-      actions: ["bold", "underline", "italic", "strikethrough", "align-left", "align-center", "align-right", "unordered-list", "ordered-list", "link"]
+(function($, window, document) {
+
+  var Plugin, defaults, pluginName;
+
+  pluginName = "yellowtext";
+
+  defaults = {
+
+    setFrameManual: false,
+    width: 100,
+    widthType: "%",
+    height: 350,
+    heightType: "px",
+
+    container: "js-yellow-text-editor",
+    buttons: "js-yellow-text-buttons",
+
+    actions: ["bold", "underline", "italic", "strikethrough", "align-left", "align-center", "align-right", "unordered-list", "ordered-list", "link"]
+  };
+
+  Plugin = (function() {
+
+    function Plugin(element, options) {
+
+      // Define the plugin global elements
+      this._name = pluginName;
+      this.settings = $.extend({}, defaults, options);
+
+      // Keep a copy of the first settings
+      this._defaults = defaults;
+      this._el = element;
+      this.$_el = $( element );
+
+      // Intantiate the plugin
+      this.render();
+
+      // After initializing listen to events
+      this.events();
+    }
+
+    /*
+    - Helper functions ----------------------------------------- #
+    */
+
+    Plugin.prototype.setContentForEditor = function() {
+      this.$el.html( this.$_el.val() );
     };
-    Plugin = (function() {
-      function Plugin(element, options) {
-        this.element = element;
-        this.settings = $.extend({}, defaults, options);
-        this._defaults = defaults;
-        this._name = pluginName;
-        this.render();
-        this.events();
+
+    Plugin.prototype.setContentForTextarea = function() {
+      this.$_el.val( this.$el.html() );
+    };
+
+    Plugin.prototype.cleanCode = function() {};
+
+    /*
+    - Render the plugin ----------------------------------------- #
+    */
+
+    Plugin.prototype.render = function() {
+
+      // Hide the current element, preferable a textarea
+      this.$_el.hide();
+
+      // Create the container element
+      container = this.createEditorContainer();
+
+      // Define the main element, that we will use: the texteditor
+      this.el = container;
+      this.$el = $( this.el );
+
+      // Add the editor after the textarea, the textarea
+      // reference is kept in the this._el
+      this.$_el.after( this.$el );
+
+      // Set the frame of the editor if it's needed
+      if( !this.settings.setFrameManual ) {
+        this.setEditorFrame();
       }
 
-      /*
-      - Helper functions ----------------------------------------- #
-      */
+      // If the textare has some content, add it to the text editor
+      if( this.$_el.val() ) {
+        this.setContentForEditor();
+      }
+    };
 
+    Plugin.prototype.createEditorContainer = function() {
+      return $("<div />").addClass(this.settings.container).css({
+        "float": "left"
+      }).attr("contenteditable", true);
+    };
 
-      Plugin.prototype.setContentForEditor = function(content) {};
-
-      Plugin.prototype.setContentForTextarea = function(content) {};
-
-      Plugin.prototype.getContentFromEditor = function() {};
-
-      Plugin.prototype.getContentFromTextarea = function() {};
-
-      Plugin.prototype.cleanCode = function() {};
-
-      /*
-      - Render the plugin ----------------------------------------- #
-      */
-
-
-      Plugin.prototype.render = function() {
-        this.renderContainers();
-        this.renderButtons();
-      };
-
-      Plugin.prototype.renderContainers = function() {};
-
-      Plugin.prototype.renderButtons = function() {};
-
-      /*
-      - Listen to events ----------------------------------------- #
-      */
-
-
-      Plugin.prototype.events = function() {};
-
-      /*
-      - Plugin actions ----------------------------------------- #
-      */
-
-
-      Plugin.prototype.execute = function() {};
-
-      return Plugin;
-
-    })();
-    return $.fn[pluginName] = function(options) {
-      return this.each(function() {
-        if (!$.data(this, "plugin_" + pluginName)) {
-          return $.data(this, "plugin_" + pluginName, new Plugin(this, options));
-        }
+    Plugin.prototype.setEditorFrame = function() {
+      this.$el.css({
+        "width": this.settings.width + this.settings.widthType,
+        "height": this.settings.height + this.settings.heightType
       });
     };
-  })(jQuery, window, document);
 
-}).call(this);
+    /*
+    - Listen to events ----------------------------------------- #
+    */
+
+    Plugin.prototype.events = function() {};
+
+    /*
+    - Plugin actions ----------------------------------------- #
+    */
+
+    Plugin.prototype.execute = function() {};
+
+    return Plugin;
+
+  })();
+
+  return $.fn[pluginName] = function(options) {
+    return this.each(function() {
+      if (!$.data(this, "plugin_" + pluginName)) {
+        return $.data(this, "plugin_" + pluginName, new Plugin(this, options));
+      }
+    });
+  };
+})(jQuery, window, document);
