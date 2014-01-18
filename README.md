@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/stefanvermaas/yellow-text.png?label=ready)](https://waffle.io/stefanvermaas/yellow-text)
 ![image](http://f.cl.ly/items/3A1s071l1H0M1c34210k/Schermafbeelding%202013-01-16%20om%2019.02.11.png)
 
 Editing text shouldn't be a pain. It should be simple. It should be pretty. With Yellow Text it is. 
