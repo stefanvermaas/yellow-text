@@ -1,3 +1,11 @@
+/*
+ *  Yellow Text - v0.5.0
+ *  Yellow Text is a beautiful text editor which makes creating content fun again. It ships with a beautiful theme and really clever shortkeys.
+ *  https://github.com/stefanvermaas/yellow-text
+ *
+ *  Made by Stefan Vermaas
+ *  Under BEERWARE License
+ */
 ;(function ( $, window, document, undefined ) {
 
     // Create the defaults once

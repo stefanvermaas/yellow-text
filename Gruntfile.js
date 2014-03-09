@@ -1,5 +1,9 @@
 module.exports = function(grunt) {
 
+  // Load Grunt tasks declared in the package.json file
+  require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
+
+  // Configure Grunt
   grunt.initConfig({
 
     // Import package manifest
@@ -30,7 +34,7 @@ module.exports = function(grunt) {
 
     // Lint definitions
     jshint: {
-      files: ["src/yellow-text.js"],
+      files: "src/yellow-text.js",
       options: {
         jshintrc: ".jshintrc"
       }
@@ -39,25 +43,40 @@ module.exports = function(grunt) {
     // Minify definitions
     uglify: {
       my_target: {
-        src: ["dist/yellow-text.js"],
-        dest: "dist/yellow-text.min.js"
+        files: {
+          "dist/yellow-text.min.js": "dist/yellow-text.js"
+        }
       },
       options: {
         banner: "<%= meta.banner %>"
       }
     },
 
-    // Watch the project folder and start the tasks
+    // grunt-watch will monitor the projects files
     watch: {
-      files: ["src/*.js"],
-      tasks: ["default"]
-    }
+      all: {
+        files: ["src/*.js"],
+        tasks: ["default"],
+        options: {
+          livereload: true
+        }
+      }
+    },
+
+    // grunt-express will serve the files from the folders listed in `bases`
+    // on specified `port` and `hostname`
+    express: {
+      all: {
+        options: {
+          port: 4000,
+          hostname: "0.0.0.0",
+          bases: ['demo', 'dist'],
+          livereload: true
+        }
+      }
+    },
   });
 
-  grunt.loadNpmTasks("grunt-contrib-watch");
-  grunt.loadNpmTasks("grunt-contrib-concat");
-  grunt.loadNpmTasks("grunt-contrib-jshint");
-  grunt.loadNpmTasks("grunt-contrib-uglify");
-
   grunt.registerTask("default", ["jshint", "concat", "uglify"]);
+  grunt.registerTask("server", ["express", "watch"])
 };
