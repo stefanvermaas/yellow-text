@@ -17,7 +17,7 @@ This lightweight jQuery plugin can be used to make your text editing proces a lo
 Make sure you call the plugin by it's name
 
 ```javascript
-$("#js-your-html-element").texteditor();
+$("#js-your-html-element").YellowText();
 ```
 
 **Step 3:** Annnnnnnnnnd... finished! Wasn't that hard huh?!
@@ -30,7 +30,7 @@ This function makes it possible to use an other jQuery / javasscript plugin to u
 
 ```javascript
 $(function() {
-    $("#js-textarea").texteditor({
+    $("#js-textarea").YellowText({
         setImage: function() {
 
             // Grap the image
@@ -52,7 +52,7 @@ The function has one single parameter, which is a boolean, that can be used like
 
 ```javascript
 $(function() {
-    $("#js-textarea").texteditor({
+    $("#js-textarea").YellowText({
       isContentChanged: function( changed ) {
         
         // Check or the content is changed
