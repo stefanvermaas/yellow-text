@@ -1,0 +1,20 @@
+{
+  "name": "yellowtext",
+  "title": "YellowText",
+  "description": "YellowText is a rich text editor, that's both simple and sophisticated.",
+  "author": "Stefan Vermaas",
+  "homepage": "https://github.com/stefanvermaas/yellow-text/",
+  "version": "1.0.0",
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-cli": "~0.1.7",
+    "grunt-contrib-jshint": "~0.4.3",
+    "grunt-contrib-concat": "~0.3.0",
+    "grunt-contrib-uglify": "~0.2.0",
+    "grunt-contrib-watch": "^0.6.1",
+    "grunt-contrib-connect": "^0.8.0"
+  },
+  "scripts": {
+    "test": "grunt travis --verbose"
+  }
+}

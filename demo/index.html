@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>YellowText</title>
+
+    <!-- / LiveReload \ -->
+    <script src="//localhost:35729/livereload.js"></script>
+    <!-- \ LiveReload / -->
+
+    <!-- / jQuery scripts \ -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+    <script src="../dist/jquery.yellowtext.js"></script>
+    <!-- \ jQuery scripts / -->
+
+    <!-- / CSS scripts \ -->
+    <link rel="stylesheet" href="./stylesheets/normalize.css">
+    <link rel="stylesheet" href="./stylesheets/application.css">
+    <!-- \ CSS scripts / -->
+
+  </head>
+  <body>
+
+    <div class="container">
+      <div class="row">
+
+        <textarea name="text" id="js-yellow-text" cols="30" rows="10"></textarea>
+
+      </div><!-- .row -->
+    </div><!-- .container -->
+
+    <script>
+
+      // Bind the plugin to an HTML element on document ready
+      $(function() {
+        $("#js-yellow-text").yellowtext();
+      });
+
+    </script>
+  </body>
+</html>
