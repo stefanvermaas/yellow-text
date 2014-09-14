@@ -1,0 +1,17 @@
+/**
+ *
+ *  DEMO stylesheet for YellowText
+ *
+ */
+
+ * { box-sizing: border-box; }
+
+.container {
+  width: 75%;
+  margin: 0 auto;
+}
+
+.row {
+  float: left;
+  width: 100%;
+}

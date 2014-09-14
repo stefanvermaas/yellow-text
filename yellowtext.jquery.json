@@ -1,0 +1,36 @@
+{
+  "name": "yellowtext",
+  "title": "YellowText",
+  "description": "YellowText is a beautiful text editor which makes creating content fun again. It ships with a beautiful theme and really clever shortkeys.",
+  "keywords": [
+    "YellowText",
+    "texteditor",
+    "simple text editor",
+    "rich text editor"
+  ],
+  "version": "1.0.0",
+  "author": {
+    "name": "Stefan Vermaas",
+    "url": "http://www.stefanvermaas.nl"
+  },
+  "maintainers": [
+    {
+      "name": "Stefan Vermaas",
+      "email": "stefanvermaas1991@gmail.com",
+      "url": "http://www.github.com/stefanvermaas"
+    }
+  ],
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/stefanvermaas/yellow-text"
+    }
+  ],
+  "bugs": "https://github.com/stefanvermaas/yellow-text/issues",
+  "homepage": "https://github.com/stefanvermaas/yellow-text",
+  "docs": "https://github.com/stefanvermaas/yellow-text",
+  "download": "https://github.com/stefanvermaas/yellow-text",
+  "dependencies": {
+    "jquery": ">=1.8"
+  }
+}
