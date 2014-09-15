@@ -11,7 +11,8 @@
   // Create the defaults once
   var pluginName = 'yellowtext',
       defaults = {
-        propertyName: 'value'
+        width:    '100%',
+        height:   '500px'
       };
 
   // The actual plugin constructor
@@ -54,10 +55,65 @@
      */
     createPluginSkeleton: function() {
 
+      // Create the editors container
+      this.$container = this.createContainerElement();
+
       // Create the new iframe/editor window
+      this.$editor = this.createEditorElement();
+
+      // Create the button bar
+      this.$buttonBar = this.createButtonBarElement();
     },
 
-    helper: {
+    createContainerElement: function() {
+
+      // Create the editor container element
+      var $container = $( document.createElement('div') ).css({
+        'float':    'left',
+        'width':    this.options.width,
+        'height':   this.options.height
+      });
+
+      // Append the container after the element
+      this.$el.after( $container );
+      return $container;
+    },
+
+    createEditorElement: function() {
+
+      // Define the variables
+      var $editor, editor;
+
+      // Create the editor (iFrame)
+      $editor = $( document.createElement('iframe') ).css({
+        'float':    'left',
+        'width':    this.options.width,
+        'height':   this.options.height,
+        'border':   0,
+        'overflow': 'hidden'
+      });
+
+      // Append the editor to the container
+      $editor.appendTo( this.$container );
+
+      /**
+       *  NOTE: We need to open, close and put the design mode on, to be able
+       *  to edit the content of the iFrame.
+       */
+      editor = $editor.get(0);
+      editor.contentWindow.document.open();
+      editor.contentWindow.document.close();
+      editor.contentWindow.document.designMode = 'on';
+
+      // Return the jQuery editor element
+      return $editor;
+    },
+
+    createButtonBarElement: function() {
+
+    },
+
+    helpers: {
 
       /**
        *  The following functions hasClass(), addClass(), removeClass() and
