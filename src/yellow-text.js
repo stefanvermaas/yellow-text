@@ -223,7 +223,7 @@
 
         // Bind the keyup event, to check for changes
         $( this.editor ).contents().find("body").on("keyup", function() {
-          that.hasContentChanged();
+          that.contentHasChanged();
         });
 
         // Bind to the submit event of the form
@@ -239,12 +239,14 @@
 
       /**
       *
-      * hasContentChanged
+      * contentHasChanged
       * =========================================
       * This function check if the content has changed
+      * and trigger this.options.isContentChanged callback
       */
-      hasContentChanged: function() {
+      contentHasChanged: function() {
           var that = this;
+
           // Check or the text is changed
           var changed = ( $( that.editor ).contents().find("body").html() !== $( that.element).text() ) ? true : false;
 
@@ -272,7 +274,7 @@
         this.editor.contentWindow.focus();
 
         // is content changed?
-        this.hasContentChanged();
+        this.contentHasChanged();
       },
 
       /**
