@@ -100,7 +100,7 @@
       },
 
       /**
-      * Render the plugin 
+      * Render the plugin
       */
       render: function() {
 
@@ -231,12 +231,7 @@
 
         // Bind the keyup event, to check for changes
         $( this.editor ).contents().find("body").on("keyup", function() {
-
-          // Check or the text is changed
-          var changed = ( $( that.editor ).contents().find("body").html() !== $( that.element).text() ) ? true : false;
-
-          // Call the callback
-          that.options.isContentChanged( changed );
+          that.contentHasChanged();
         });
 
         // Bind to the submit event of the form
@@ -248,6 +243,23 @@
           // Put the content back in the textfield
           that.setContentToTextarea( that.getContentFromEditor() );
         });
+      },
+
+      /**
+      *
+      * contentHasChanged
+      * =========================================
+      * This function check if the content has changed
+      * and trigger this.options.isContentChanged callback
+      */
+      contentHasChanged: function() {
+          var that = this;
+
+          // Check or the text is changed
+          var changed = ( $( that.editor ).contents().find("body").html() !== $( that.element).text() ) ? true : false;
+
+          // Call the callback
+          this.options.isContentChanged( changed );
       },
 
       /**
@@ -268,6 +280,9 @@
 
         // And focus back again on the contentWindow
         this.editor.contentWindow.focus();
+
+        // is content changed?
+        this.contentHasChanged();
       },
 
       /**
@@ -341,7 +356,7 @@
         // Remove classes from ul tag
         $(this.editor).contents().find("body").find("ul").removeAttr("class").unwrap();
 
-        // Remove classes from ol tag 
+        // Remove classes from ol tag
         $(this.editor).contents().find("body").find("ol").removeAttr("class").unwrap();
 
         // Remove all div tags
